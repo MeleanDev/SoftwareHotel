@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Habitacione extends Model
 {
@@ -24,10 +25,13 @@ class Habitacione extends Model
         'sede_id'
         ];
 
-    protected $hidden = ['sede_id'];
-
     public function sede(): BelongsTo
     {
         return $this->belongsTo(Sede::class);
+    }
+
+    public function reserva(): HasMany
+    {
+        return $this->hasMany(Reserva::class);
     }
 }

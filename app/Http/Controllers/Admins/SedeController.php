@@ -72,10 +72,7 @@ class SedeController extends Controller
     public function eliminar(Sede $id): JsonResponse
     {
         $id->delete();
-        return response()->json([
-            'success' => true,
-            'msj' => 'Sede eliminada'
-        ]);
+        return response()->json(['success' => true]);
     }
 
 }

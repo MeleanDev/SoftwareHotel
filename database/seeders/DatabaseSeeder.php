@@ -21,9 +21,13 @@ class DatabaseSeeder extends Seeder
         $moderador = Role::create(['name' => 'Moderador']);
         $huesped = Role::create(['name' => 'Huesped']);
 
-        Permission::create(['name' => 'administrador'])->assignRole($admin);
-        Permission::create(['name' => 'moderador'])->assignRole($moderador);
-        Permission::create(['name' => 'huesped'])->assignRole($huesped);
+        Permission::create(['name' => 'sedes'])->assignRole($admin);
+        Permission::create(['name' => 'habitaciones'])->assignRole($moderador);
+        Permission::create(['name' => 'reservas'])->assignRole($huesped);
+        // Permission::create(['name' => 'reservas'])->assignRole($huesped);
+        // Permission::create(['name' => 'reservas'])->assignRole($huesped);
+        // Permission::create(['name' => 'reservas'])->assignRole($huesped);
+        // Permission::create(['name' => 'reservas'])->assignRole($huesped);
 
         User::factory()->create([
             'name' => 'luis',

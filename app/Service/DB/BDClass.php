@@ -3,8 +3,12 @@
 namespace App\Service\DB;
 
 use App\Models\Habitacione;
+use App\Models\Reserva;
 use App\Models\Sede;
 use App\Models\Ubicacione;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class BDClass
 {
@@ -67,9 +71,15 @@ class BDClass
 
     // Habitaciones
         // Lista
-        public function HabitacionesLista()
-        {
+        public function HabitacionesLista(){
             $datos = Habitacione::with('sede')->get();
+            return $datos;
+        }
+
+        // Lista
+        public function habitacionesDisponibles()
+        {
+            $datos = Habitacione::where('disponibilidad', 'disponible')->with('sede')->get();
             return $datos;
         }
 
@@ -107,70 +117,65 @@ class BDClass
             $id->save();
         }
 
+        // Liberal habitacion
+        public function HabitacionesEstado($id, $estado){
+            $id = Habitacione::find($id);
+            $id->disponibilidad = $estado;
+            $id->save();
+        }
+
     // // Users
-    //     // Lista
-    //     public function UserListaHuesped(){
-    //         $datos = User::where('tipo', 'Huesped')->get();
-    //         return $datos;
-    //     }
+        // Lista
+        public function UserListaHuesped(){
+                $datos = User::where('tipo', 'Huesped')->get();
+                return $datos;
+        }
 
-    //     public function UserListaModeradores(){
-    //         $datos = User::where('tipo', 'Moderador')->get();
-    //         return $datos;
-    //     }
+        public function UserListaModeradores(){
+            $datos = User::where('tipo', 'Moderador')->with('sede')->get();
+            return $datos;
+        }
 
-    //     public function UserListaAdministradores(){
-    //         $datos = User::where('tipo', 'Administrador')->get();
-    //         return $datos;
-    //     }
+        public function UserListaAdministradores(){
+            $datos = User::where('tipo', 'Administrador')->get();
+            return $datos;
+        }
 
-    //     // Crear
-    //     public function UserCrear($datos, $rol)
-    //     {
-    //         $admin = new User();
-    //         $admin->nombre = $datos['nombre'];
-    //         $admin->apellido = $datos['apellido'];
-    //         $admin->identificacion = $datos['identificacion'];
-    //         $admin->telefono = $datos['telefono'];
-    //         $admin->email = $datos['email'];
-    //         $admin->password = Hash::make($datos['password']);
-    //         $admin->tipo = $rol;
-    //         if ($datos['sede_id'] == true) {
-    //             $admin->sede()->associate($datos['sede_id']);
-    //         }
-    //         $admin->save();
-    //     }
+        // Crear
+        public function UserCrear($datos, $rol)
+        {
+            $admin = new User();
+            $admin->name = $datos['nombre'];
+            $admin->apellido = $datos['apellido'];
+            $admin->identificacion = $datos['identificacion'];
+            $admin->telefono = $datos['telefono'];
+            $admin->email = $datos['email'];
+            $admin->password = Hash::make($datos['password']);
+            $admin->tipo = $rol;
+            if ($datos['sede_id'] == true) {
+                $admin->sede()->associate($datos['sede_id']);
+            }
+            $admin->save();
+        }
 
-    //     // EditarPanel
-    //     public function UserEditarPanel($datos, $id){
-    //         $id->nombre = $datos['nombre'];
-    //         $id->apellido = $datos['apellido'];
-    //         $id->identificacion = $datos['identificacion'];
-    //         $id->telefono = $datos['telefono'];
-    //         $id->email = $datos['email'];
-    //         $id->password = Hash::make($datos['password']);
-    //         $id->save();
-    //     }
+        // EditarPanel
+        public function UserEditarPanel($datos, $id){
+            $id->name = $datos['nombre'];
+            $id->apellido = $datos['apellido'];
+            $id->identificacion = $datos['identificacion'];
+            $id->telefono = $datos['telefono'];
+            $id->email = $datos['email'];
+            $id->password = Hash::make($datos['password']);
+            $id->save();
+        }
 
-    //     // EditarNormal
-    //     public function UserEditarUni($datos){
-    //         $authUser = $this->buscarAuth();
-    //         $authUser->nombre = $datos['nombre'];
-    //         $authUser->apellido = $datos['apellido'];
-    //         $authUser->identificacion = $datos['identificacion'];
-    //         $authUser->telefono = $datos['telefono'];
-    //         $authUser->email = $datos['email'];
-    //         $authUser->password = Hash::make($datos['password']);
-    //         $authUser->save();
-    //     }
-
-    // // Reservas
-    //     // Lista
-    //         // Admin
-    //         public function ReservaListaAdmin(){
-    //             $datos = Reserva::with('user')->with('habitacione')->get();
-    //             return $datos;
-    //         }
+    // Reservas
+        // Lista
+            // Admin
+            public function ReservaListaAdmin(){
+                $datos = Reserva::with('user')->with('habitacione')->get();
+                return $datos;
+            }
 
     //         // Huesped
     //         public function ReservaListaHuesped(){
@@ -193,18 +198,17 @@ class BDClass
     //             $rese->save();
     //         }
 
-    //         // Admin o moderador
-    //         public function ReservaCrearTrabajador($datos){
-    //             $user = $this->buscarAuth();
-    //             $rese = new Reserva();
-    //             $rese->estado = 'En Proceso';
-    //             $rese->identificador = now().''.$user->id;
-    //             $rese->fecha_entrada = $datos['fecha_entrada'];
-    //             $rese->fecha_salida = $datos['fecha_salida'];
-    //             $rese->habitacione_id = $datos['habitacione_id'];
-    //             $rese->user_id = $datos['user_id'];
-    //             $rese->save();
-    //         }
+            // Admin o moderador
+            public function ReservaCrearTrabajador($datos){
+                $rese = new Reserva();
+                $rese->estado = 'En Proceso';
+                $rese->identificador = now()->timestamp * 1000;
+                $rese->fecha_entrada = $datos['fecha_entrada'];
+                $rese->fecha_salida = $datos['fecha_salida'];
+                $rese->habitacione()->associate($datos['habitacione_id']);
+                $rese->user()->associate($datos['huesped_id']);
+                $rese->save();
+            }
 
     //     // Editar
     //     public function ReservaEditar($datos, $id){
@@ -215,6 +219,12 @@ class BDClass
     //         $id->user_id = $datos['user_id'];
     //         $id->save();
     //     }
+
+            // Verificar Activa
+            public function ReservaVerificarActiva($id){
+                $dato = Reserva::where('user_id', $id)->where('estado', 'En Proceso')->first();
+                return $dato;
+            }
         
 
 

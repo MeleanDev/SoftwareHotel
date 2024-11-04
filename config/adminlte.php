@@ -323,13 +323,31 @@ return [
             'text' => 'Sedes',
             'route' => 'sede',
             'icon' => 'fas fa-hotel',
-            'can' => 'administrador',
         ],
         [
             'text' => 'Habitaciones',
             'route' => 'habitaciones',
             'icon' => 'fas fa-door-closed',
-            'can' => 'administrador',
+        ],
+        [
+            'text' => 'Reservas',
+            'route' => 'reservas',
+            'icon' => 'fas fa-clipboard-list',
+        ],
+        [
+            'text' => 'Administradores',
+            'route' => 'administradores',
+            'icon' => 'fas fa-user-shield',
+        ],
+        [
+            'text' => 'Moderadores',
+            'route' => 'moderadores',
+            'icon' => 'fas fa-id-card',
+        ],
+        [
+            'text' => 'Huesped',
+            'route' => 'huesped',
+            'icon' => 'fas fa-address-book',
         ],
         ['header' => 'account_settings'],
         [

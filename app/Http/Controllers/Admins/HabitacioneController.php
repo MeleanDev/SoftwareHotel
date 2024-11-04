@@ -30,7 +30,7 @@ class HabitacioneController extends Controller
         return datatables()->of($datos)->toJson();
     }
 
-    public function listaSedes(Request $request)
+    public function listaSedes(Request $request): JsonResponse
     {
         $sedes = $this->habitacioneClass->sedes();
 
@@ -49,49 +49,6 @@ class HabitacioneController extends Controller
 
         return response()->json($results);
     }
-
-    // public function listaModerador(): JsonResponse
-    // {
-    //     $datos = $this->habitacioneClass->listaModerador();
-    //     if ($datos->isEmpty()) {
-    //         return response()->json(
-    //             [
-    //                 'success' => true,
-    //                 'msj' => 'No se encuentran registros'
-    //             ],
-    //             200
-    //         );
-    //     }
-    //     return response()->json(
-    //         [
-    //             'success' => true,
-    //             'Habitaciones' => $datos
-    //         ],
-    //         200
-    //     );
-    // }
-
-    // public function cantidad(): JsonResponse
-    // {
-    //     try {
-    //         $Totales = Habitacione::count();
-    //         $Disponibles = Habitacione::where('disponibilidad', 'S')->count();
-    //         $Ocupadas = Habitacione::where('disponibilidad', 'N')->count();
-
-    //         $respuesta = response()->json([
-    //             'success' => true,
-    //             'Totales' => $Totales,
-    //             'Disponibles' => $Disponibles,
-    //             'Ocupadas' => $Ocupadas,
-    //         ]);
-    //     } catch (\Throwable $th) {
-    //         $respuesta = response()->json([
-    //             'error' => true,
-    //             'msj' => 'Error no en el sistema'
-    //         ]);
-    //     }
-    //     return $respuesta;
-    // }
 
     public function detalle($id): JsonResponse
     {

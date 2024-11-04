@@ -1,7 +1,11 @@
 <?php
 
+use App\Http\Controllers\Admins\AdministradoreController;
 use App\Http\Controllers\Admins\DashboardController;
 use App\Http\Controllers\Admins\HabitacioneController;
+use App\Http\Controllers\Admins\HuespedController;
+use App\Http\Controllers\Admins\ModeradoreController;
+use App\Http\Controllers\Admins\ReservaController;
 use App\Http\Controllers\Admins\SedeController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -22,7 +26,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         });
 
         // Sede
-        Route::controller(SedeController::class)->middleware('can:administrador')->group(function () {
+        Route::controller(SedeController::class)->group(function () {
             Route::get('Sedes', 'index')->name('sede');
             Route::get('Sedes/Lista', 'lista');
             Route::post('Sedes', 'crear');
@@ -32,7 +36,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         });
 
         // Habitaciones
-        Route::controller(HabitacioneController::class)->middleware('can:administrador')->group(function () {
+        Route::controller(HabitacioneController::class)->group(function () {
             Route::get('Habitaciones', 'index')->name('habitaciones');
             Route::get('Habitaciones/Lista', 'lista');
             Route::get('Habitaciones/Lista/Sedes', 'listaSedes');
@@ -42,7 +46,47 @@ Route::middleware(['auth', 'verified'])->group(function () {
             Route::delete('Habitaciones/{id}', 'eliminar');
         });
 
-        
+        // reserva
+        Route::controller(ReservaController::class)->group(function () {
+            Route::get('Reservas', 'index')->name('reservas');
+            Route::get('Reservas/Lista', 'lista');
+            Route::get('Reservas/Lista/Habitaciones', 'habitaciones');
+            Route::get('Reservas/Lista/Huesped', 'huesped');
+            Route::post('Reservas', 'crear');
+            Route::get('Reservas/Cancelar/{id}', 'cancelar');
+            Route::get('Reservas/Activar/{id}', 'activar');
+            Route::get('Reservas/Completada/{id}', 'completada');
+        });
 
+        // Administradores
+        Route::controller(AdministradoreController::class)->group(function () {
+            Route::get('Administradores', 'index')->name('administradores');
+            Route::get('Administradores/Lista', 'lista');
+            Route::post('Administradores', 'crear');
+            Route::get('Administradores/{id}', 'detalle');
+            Route::post('Administradores/Editar/{id}', 'editar');
+            Route::delete('Administradores/{id}', 'eliminar');
+        });
+
+        // Moderadores
+        Route::controller(ModeradoreController::class)->group(function () {
+            Route::get('Moderadores', 'index')->name('moderadores');
+            Route::get('Moderadores/Lista', 'lista');
+            Route::get('Moderadores/Lista/Sedes', 'sedes');
+            Route::post('Moderadores', 'crear');
+            Route::get('Moderadores/{id}', 'detalle');
+            Route::post('Moderadores/Editar/{id}', 'editar');
+            Route::delete('Moderadores/{id}', 'eliminar');
+        });
+
+        // Huesped
+        Route::controller(HuespedController::class)->group(function () {
+            Route::get('Huesped', 'index')->name('huesped');
+            Route::get('Huesped/Lista', 'lista');
+            Route::post('Huesped', 'crear');
+            Route::get('Huesped/{id}', 'detalle');
+            Route::post('Huesped/Editar/{id}', 'editar');
+            Route::delete('Huesped/{id}', 'eliminar');
+        });
     });
 });

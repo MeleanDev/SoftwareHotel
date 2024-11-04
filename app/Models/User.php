@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Spatie\Permission\Models\Role;
 use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
@@ -29,6 +30,7 @@ class User extends Authenticatable
         'identificacion',
         'email',
         'password',
+        'tipo',
         'sede_id'
     ];
 
@@ -45,6 +47,11 @@ class User extends Authenticatable
     public function sede(): BelongsTo 
     {
         return $this->belongsTo(Sede::class);
+    }
+
+    public function rol(): BelongsTo 
+    {
+        return $this->belongsTo(Role::class);
     }
 
     /**
