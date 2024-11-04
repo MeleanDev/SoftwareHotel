@@ -14,11 +14,15 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('apellido');
+            $table->string('identificacion', 20)->unique();
+            $table->string('telefono', 20)->unique();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->foreignId('sede_id')->nullable()->references('id')->on('sedes')->onDelete('restrict');
             $table->rememberToken();
-            $table->timestamps();
+            // $table->timestamps();
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
