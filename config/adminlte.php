@@ -323,11 +323,13 @@ return [
             'text' => 'Sedes',
             'route' => 'sede',
             'icon' => 'fas fa-hotel',
+            'can' => 'administrador',
         ],
         [
             'text' => 'Habitaciones',
             'route' => 'habitaciones',
             'icon' => 'fas fa-door-closed',
+            'can' => 'administrador',
         ],
         ['header' => 'account_settings'],
         [

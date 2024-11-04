@@ -22,7 +22,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         });
 
         // Sede
-        Route::controller(SedeController::class)->group(function () {
+        Route::controller(SedeController::class)->middleware('can:administrador')->group(function () {
             Route::get('Sedes', 'index')->name('sede');
             Route::get('Sedes/Lista', 'lista');
             Route::post('Sedes', 'crear');
@@ -32,7 +32,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         });
 
         // Habitaciones
-        Route::controller(HabitacioneController::class)->group(function () {
+        Route::controller(HabitacioneController::class)->middleware('can:administrador')->group(function () {
             Route::get('Habitaciones', 'index')->name('habitaciones');
             Route::get('Habitaciones/Lista', 'lista');
             Route::get('Habitaciones/Lista/Sedes', 'listaSedes');
