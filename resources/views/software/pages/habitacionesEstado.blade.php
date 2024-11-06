@@ -19,6 +19,7 @@
             <thead class="bg-info">
                 <tr>
                     <th data-priority="1">Identifiacador</th>
+                    <th>Tipo</th>
                     <th data-priority="2">Disponibilidad</th>
                 </tr>
             </thead>

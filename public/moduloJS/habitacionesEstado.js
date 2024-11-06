@@ -15,6 +15,11 @@ var table = new DataTable('#datatable', {
         className: 'text-center'
     },
     {
+        data: 'tipo',
+        name: 'tipo',
+        className: 'text-center'
+    },
+    {
         data: 'disponibilidad',
         name: 'disponibilidad',
         className: 'text-center',
