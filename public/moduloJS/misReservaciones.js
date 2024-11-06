@@ -19,19 +19,6 @@ $(document).ready(function () {
         }
     });
 
-    // Huesped
-    $.ajax({
-        url: urlCompleta + "/Lista/Huesped",
-        type: 'GET',
-        dataType: "json",
-        success: function (data) {
-            data.forEach(function (item) {
-                const optionHuesped = new Option(item.huespedText, item.huespedId);
-                selectHuesped.append(optionHuesped);
-            });
-        }
-    });
-
 });
 
 var table = new DataTable('#datatable', {
@@ -46,6 +33,21 @@ var table = new DataTable('#datatable', {
     columns: [{
         data: 'identificador',
         name: 'identificador',
+        className: 'text-center'
+    },
+    {
+        data: 'fecha_entrada',
+        name: 'fecha_entrada',
+        className: 'text-center'
+    },
+    {
+        data: 'fecha_salida',
+        name: 'fecha_salida',
+        className: 'text-center'
+    },
+    {
+        data: 'habitacione.identificador',
+        name: 'habitacione.identificador',
         className: 'text-center'
     },
     {
@@ -66,31 +68,6 @@ var table = new DataTable('#datatable', {
         }
     },
     {
-        data: 'fecha_entrada',
-        name: 'fecha_entrada',
-        className: 'text-center'
-    },
-    {
-        data: 'fecha_salida',
-        name: 'fecha_salida',
-        className: 'text-center'
-    },
-    {
-        data: 'habitacione.identificador',
-        name: 'habitacione.identificador',
-        className: 'text-center'
-    },
-    {
-        data: 'habitacione.tipo',
-        name: 'habitacione.tipo',
-        className: 'text-center'
-    },
-    {
-        data: 'user.identificacion',
-        name: 'user.identificacion',
-        className: 'text-center'
-    },
-    {
         "data": null,
         "width": "100px",
         "className": "text-center",
@@ -104,19 +81,11 @@ var table = new DataTable('#datatable', {
                             <div class="dropdown-menu dropdown-menu-sm" aria-labelledby="dropdownMenuButton">
                                 <a class="dropdown-item" data-id="${row.id}" href="javascript:editar(${row.id});"><i class="fa fa-edit text-warning"></i> Editar</a>
                                 <a class="dropdown-item" data-id="${row.id}" href="javascript:cancelar(${row.id});"><i class="fa fa-trash text-danger"></i> Cancelar</a>
-                                <a class="dropdown-item" data-id="${row.id}" href="javascript:activar(${row.id});"><i class="fa fa-trash text-success"></i> Activar</a>
                             </div>
                         </div>`
                     } else if(row.estado === 'Activa'){ 
                         return `
-                        <div class="dropdown dropleft">
-                            <button class="btn btn-link text-secondary mb-0 dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fa fa-ellipsis-v text-xs"></i>
-                            </button>
-                            <div class="dropdown-menu dropdown-menu-sm" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" data-id="${row.id}" href="javascript:completar(${row.id});"><i class="fa fa-trash text-info"></i> Completada</a>
-                            </div>
-                        </div>`
+                        <span class="badge badge-success">Activa</span>`
                     }else if(row.estado === 'Completada'){ 
                         return `<span class="badge badge-info">Completada</span>`
                     }if(row.estado === 'Cancelada'){ 
@@ -175,7 +144,6 @@ $('#formulario').submit(function (e) {
     formData.append('identificador', $.trim($('#identificador').val()));
     formData.append('fecha_entrada', $.trim($('#fecha_entrada').val()));
     formData.append('fecha_salida', $.trim($('#fecha_salida').val()));
-    formData.append('huesped_id', $.trim($('#huesped_id').val()));
     formData.append('habitacione_id', $.trim($('#habitacione_id').val()));
 
     $.ajax({
@@ -281,48 +249,48 @@ crear = function () {
 
 
 
-editar = async function(id) {
-    rutaAccion = urlCompleta + '/Editar/' + id;
-    accion = 2;
+// editar = async function(id) {
+//     rutaAccion = urlCompleta + '/Editar/' + id;
+//     accion = 2;
 
-    try {
-        $("#formulario").trigger("reset");
-        datos = await consulta(id);
-        $("#titulo").html("Editar Reserva -> " + datos.identificador);
-        $("#titulo").attr("class", "modal-title text-white");
-        $("#bg-titulo").attr("class", "modal-header bg-warning");
+//     try {
+//         $("#formulario").trigger("reset");
+//         datos = await consulta(id);
+//         $("#titulo").html("Editar Habitacion -> " + datos.identificador);
+//         $("#titulo").attr("class", "modal-title text-white");
+//         $("#bg-titulo").attr("class", "modal-header bg-warning");
 
-        // asigancion de valores
-        $("#identificador").val(datos.identificador);
-        $("#identificador").attr("readonly", false);
+//         // asigancion de valores
+//         $("#identificador").val(datos.identificador);
+//         $("#identificador").attr("readonly", false);
 
-        $("#piso").val(datos.piso);
-        $("#piso").attr("readonly", false);
+//         $("#piso").val(datos.piso);
+//         $("#piso").attr("readonly", false);
 
-        $("#numPersonas").val(datos.numPersonas);
-        $("#numPersonas").attr("readonly", false);
+//         $("#numPersonas").val(datos.numPersonas);
+//         $("#numPersonas").attr("readonly", false);
 
-        $("#precio").val(datos.precio);
-        $("#precio").attr("readonly", false);
+//         $("#precio").val(datos.precio);
+//         $("#precio").attr("readonly", false);
 
-        $('#sede_idVer').attr('type', 'hidden');
-        $("#sede_id").val(datos.sede.id);
-        $('#sede_id').show();
+//         $('#sede_idVer').attr('type', 'hidden');
+//         $("#sede_id").val(datos.sede.id);
+//         $('#sede_id').show();
 
-        $('#tipoVer').attr('type', 'hidden');
-        $('#tipo').show();
+//         $('#tipoVer').attr('type', 'hidden');
+//         $('#tipo').show();
 
 
-        $('#submit').show()
-        $('#modalCRUD').modal('show');
-    } catch (error) {
-        notificacion.fire({
-            icon: "error",
-            title: "¡ No Existe !",
-            text: "Tu registro no se puede ver."
-        });
-    }
-};
+//         $('#submit').show()
+//         $('#modalCRUD').modal('show');
+//     } catch (error) {
+//         notificacion.fire({
+//             icon: "error",
+//             title: "¡ No Existe !",
+//             text: "Tu registro no se puede ver."
+//         });
+//     }
+// };
 
 cancelar = function (id) {
     Swal.fire({
@@ -354,96 +322,6 @@ cancelar = function (id) {
                             icon: "error",
                             title: "¡ Error !",
                             text: "Tu reserva no ha sido Cancelada."
-                        });
-                    }
-                },
-                error: function (xhr, status, error) {
-                    Swal.fire({
-                        title: "Error en el sistema",
-                        text: "El registro no fue agregado al sistema!!",
-                        icon: "error"
-                    });
-                }
-            });
-        }
-    });
-};
-
-activar = function (id) {
-    Swal.fire({
-        title: '¿ Estas seguro que desea Activar la reserva #' + id + ' ?',
-        text: "¡ No podrás revertir esto !",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: '¡ Sí, Activar !',
-    }).then((result) => {
-        if (result.isConfirmed) {
-            $.ajax({
-                url: urlCompleta + '/Activar/' + id,
-                method: "GET",
-                headers: {
-                    'X-CSRF-TOKEN': token
-                },
-                success: function (data) {
-                    if (data.success) {
-                        table.ajax.reload(null, false);
-                        notificacion.fire({
-                            icon: "success",
-                            title: "¡ Activada !",
-                            text: "Tu reserva ha sido Activada."
-                        });
-                    } else {
-                        notificacion.fire({
-                            icon: "error",
-                            title: "¡ Error !",
-                            text: "Tu reserva no ha sido Activada."
-                        });
-                    }
-                },
-                error: function (xhr, status, error) {
-                    Swal.fire({
-                        title: "Error en el sistema",
-                        text: "El registro no fue agregado al sistema!!",
-                        icon: "error"
-                    });
-                }
-            });
-        }
-    });
-};
-
-completar = function (id) {
-    Swal.fire({
-        title: '¿ Estas seguro que desea Completar la reserva #' + id + ' ?',
-        text: "¡ No podrás revertir esto !",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: '¡ Sí, Completar !',
-    }).then((result) => {
-        if (result.isConfirmed) {
-            $.ajax({
-                url: urlCompleta + '/Completada/' + id,
-                method: "GET",
-                headers: {
-                    'X-CSRF-TOKEN': token
-                },
-                success: function (data) {
-                    if (data.success) {
-                        table.ajax.reload(null, false);
-                        notificacion.fire({
-                            icon: "success",
-                            title: "¡ Completar !",
-                            text: "Tu reserva ha sido Completada."
-                        });
-                    } else {
-                        notificacion.fire({
-                            icon: "error",
-                            title: "¡ Error !",
-                            text: "Tu reserva no ha sido Completada."
                         });
                     }
                 },

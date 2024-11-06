@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admins\AdministradoreController;
 use App\Http\Controllers\Admins\DashboardController;
 use App\Http\Controllers\Admins\HabitacioneController;
+use App\Http\Controllers\Admins\HabitacionEstadoController;
 use App\Http\Controllers\Admins\HuespedController;
 use App\Http\Controllers\Admins\ModeradoreController;
 use App\Http\Controllers\Admins\ReservaController;
@@ -26,8 +27,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
         });
 
         // Sede
-        Route::controller(SedeController::class)->group(function () {
-            Route::get('Sedes', 'index')->name('sede');
+        Route::controller(SedeController::class)->middleware('can:sedes')->group(function () {
+            Route::get('Sedes', 'index')->name('sedes');
             Route::get('Sedes/Lista', 'lista');
             Route::post('Sedes', 'crear');
             Route::get('Sedes/{id}', 'detalle');
@@ -36,7 +37,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         });
 
         // Habitaciones
-        Route::controller(HabitacioneController::class)->group(function () {
+        Route::controller(HabitacioneController::class)->middleware('can:habitaciones')->group(function () {
             Route::get('Habitaciones', 'index')->name('habitaciones');
             Route::get('Habitaciones/Lista', 'lista');
             Route::get('Habitaciones/Lista/Sedes', 'listaSedes');
@@ -44,10 +45,16 @@ Route::middleware(['auth', 'verified'])->group(function () {
             Route::get('Habitaciones/{id}', 'detalle');
             Route::post('Habitaciones/Editar/{id}', 'editar');
             Route::delete('Habitaciones/{id}', 'eliminar');
-        });
+        }); 
+
+        // Habitaciones Estado
+        Route::controller(HabitacionEstadoController::class)->middleware('can:habitacionesEstado')->group(function () {
+            Route::get('HabitacionesEstado', 'index')->name('habitacionesEstado');
+            Route::get('HabitacionesEstado/Lista', 'lista');
+        }); 
 
         // reserva
-        Route::controller(ReservaController::class)->group(function () {
+        Route::controller(ReservaController::class)->middleware('can:reservas')->group(function () {
             Route::get('Reservas', 'index')->name('reservas');
             Route::get('Reservas/Lista', 'lista');
             Route::get('Reservas/Lista/Habitaciones', 'habitaciones');
@@ -59,7 +66,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         });
 
         // Administradores
-        Route::controller(AdministradoreController::class)->group(function () {
+        Route::controller(AdministradoreController::class)->middleware('can:administradores')->group(function () {
             Route::get('Administradores', 'index')->name('administradores');
             Route::get('Administradores/Lista', 'lista');
             Route::post('Administradores', 'crear');
@@ -69,7 +76,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         });
 
         // Moderadores
-        Route::controller(ModeradoreController::class)->group(function () {
+        Route::controller(ModeradoreController::class)->middleware('can:moderadores')->group(function () {
             Route::get('Moderadores', 'index')->name('moderadores');
             Route::get('Moderadores/Lista', 'lista');
             Route::get('Moderadores/Lista/Sedes', 'sedes');
@@ -80,13 +87,21 @@ Route::middleware(['auth', 'verified'])->group(function () {
         });
 
         // Huesped
-        Route::controller(HuespedController::class)->group(function () {
+        Route::controller(HuespedController::class)->middleware('can:huesped')->group(function () {
             Route::get('Huesped', 'index')->name('huesped');
             Route::get('Huesped/Lista', 'lista');
             Route::post('Huesped', 'crear');
             Route::get('Huesped/{id}', 'detalle');
             Route::post('Huesped/Editar/{id}', 'editar');
             Route::delete('Huesped/{id}', 'eliminar');
+        });
+
+        // Mis Reservaciones
+        Route::controller(HuespedController::class)->middleware('can:reservashuesped')->group(function () {
+            Route::get('MisReservas', 'index')->name('reservasHuesped');
+            Route::get('MisReservas/Lista', 'lista');
+            Route::post('MisReservas', 'crear');
+            Route::get('MisReservas/Cancelar/{id}', 'cancelar');
         });
     });
 });

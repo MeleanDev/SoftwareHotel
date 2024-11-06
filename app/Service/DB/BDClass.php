@@ -3,6 +3,7 @@
 namespace App\Service\DB;
 
 use App\Models\Habitacione;
+use App\Models\MesesCantidad;
 use App\Models\Reserva;
 use App\Models\Sede;
 use App\Models\Ubicacione;
@@ -13,12 +14,12 @@ use Illuminate\Support\Facades\Hash;
 class BDClass
 {
     // Propio
-        // // Buscar datos del usuario auth
-        // public function buscarAuth(){
-        //     $id = auth::user()->getAuthIdentifier();
-        //     $usu = User::find($id);
-        //     return $usu;
-        // }
+        // Buscar datos del usuario auth
+        public function buscarAuth(){
+            $id = auth::user()->getAuthIdentifier();
+            $usu = User::find($id);
+            return $usu;
+        }
 
         // public function disponibilidad($idhabitacion, $estado){
         //     $habitacion = Habitacione::find($idhabitacion);
@@ -76,7 +77,20 @@ class BDClass
             return $datos;
         }
 
+        // Buscar Por ID
+        public function buscarHabitacionID($id){
+            $datos = Habitacione::find($id);
+            $devolver = $datos->identificador;
+            return $devolver;
+        }
+
         // Lista
+        public function HabitacionesCount(){
+            $datos = Habitacione::count();
+            return $datos;
+        }
+
+        // Disponibles
         public function habitacionesDisponibles()
         {
             $datos = Habitacione::where('disponibilidad', 'disponible')->with('sede')->get();
@@ -84,12 +98,11 @@ class BDClass
         }
 
         // Lista Moderador
-        // public function HabitacionesListaModerador()
-        // {
-        //     $user = $this->buscarAuth();
-        //     $datos = Habitacione::with('sede')->where('sede_id', $user->sede_id)->get();
-        //     return $datos;
-        // }
+        public function HabitacionesListaModerador($sede)
+        {
+            $datos = Habitacione::with('sede')->where('sede_id', $sede)->get();
+            return $datos;
+        }
 
         // Crear
         public function HabitacionesCrear($datos)
@@ -131,6 +144,19 @@ class BDClass
                 return $datos;
         }
 
+        // Buscar Por ID
+        public function buscarUserID($id){
+            $datos = User::find($id);
+            $devolver = $datos->identificacion;
+            return $devolver;
+        }
+
+        // Count
+        public function UserHuespedCount(){
+            $datos = User::where("tipo", "Huesped")->count();
+            return $datos;
+        }
+
         public function UserListaModeradores(){
             $datos = User::where('tipo', 'Moderador')->with('sede')->get();
             return $datos;
@@ -155,6 +181,7 @@ class BDClass
             if ($datos['sede_id'] == true) {
                 $admin->sede()->associate($datos['sede_id']);
             }
+            $admin->assignRole($rol);
             $admin->save();
         }
 
@@ -177,12 +204,18 @@ class BDClass
                 return $datos;
             }
 
-    //         // Huesped
-    //         public function ReservaListaHuesped(){
-    //             $user = $this->buscarAuth();
-    //             $datos = Reserva::with('habitacione')->where('user_id', $user->id)->get();
-    //             return $datos;
-    //         }
+            // Huesped
+            public function ReservaListaHuesped(){
+                $user = $this->buscarAuth();
+                $datos = Reserva::with('habitacione')->where('user_id', $user->id)->get();
+                return $datos;
+            }
+
+            // Count
+            public function ReservasCount(){
+                $datos = Reserva::count();
+                return $datos;
+            }
 
     //     // Crear
     //         // Normal
@@ -224,6 +257,14 @@ class BDClass
             public function ReservaVerificarActiva($id){
                 $dato = Reserva::where('user_id', $id)->where('estado', 'En Proceso')->first();
                 return $dato;
+            }
+
+            // Ver Reserva de sede especifica donde trabaja el moderador
+            public function ReservasModeradorLista($sede){
+                $reservas = Reserva::whereHas('habitacione.sede', function ($query) use ($sede) {
+                    $query->where('id', $sede);
+                })->get();
+                return $reservas;
             }
         
 

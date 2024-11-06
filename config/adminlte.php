@@ -64,8 +64,8 @@ return [
     */
 
     'logo' => '<b>Software</b>Hotel',
-    'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
-    'logo_img_class' => 'brand-image img-circle elevation-3',
+    'logo_img' => 'img/logo.png',
+    'logo_img_class' => 'brand-image img-circle',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
     'logo_img_alt' => 'Admin Logo',
@@ -321,33 +321,51 @@ return [
         ],
         [
             'text' => 'Sedes',
-            'route' => 'sede',
+            'route' => 'sedes',
+            'can' => 'sedes',
             'icon' => 'fas fa-hotel',
         ],
         [
             'text' => 'Habitaciones',
             'route' => 'habitaciones',
+            'can' => 'habitaciones',
             'icon' => 'fas fa-door-closed',
+        ],
+        [
+            'text' => 'Habitaciones Estado',
+            'route' => 'habitacionesEstado',
+            'can' => 'habitacionesEstado',
+            'icon' => 'fas fa-door-open',
         ],
         [
             'text' => 'Reservas',
             'route' => 'reservas',
+            'can' => 'reservas',
             'icon' => 'fas fa-clipboard-list',
         ],
         [
             'text' => 'Administradores',
             'route' => 'administradores',
+            'can' => 'administradores',
             'icon' => 'fas fa-user-shield',
         ],
         [
             'text' => 'Moderadores',
             'route' => 'moderadores',
+            'can' => 'moderadores',
             'icon' => 'fas fa-id-card',
         ],
         [
             'text' => 'Huesped',
             'route' => 'huesped',
             'icon' => 'fas fa-address-book',
+            'can' => 'huesped',
+        ],
+        [
+            'text' => 'Ver mis Reservas',
+            'route' => 'reservasHuesped',
+            'icon' => 'fas fa-book',
+            'can' => 'reservashuesped',
         ],
         ['header' => 'account_settings'],
         [

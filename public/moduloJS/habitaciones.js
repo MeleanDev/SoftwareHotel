@@ -34,18 +34,6 @@ var table = new DataTable('#datatable', {
         className: 'text-center'
     },
     {
-        data: 'disponibilidad',
-        name: 'disponibilidad',
-        className: 'text-center',
-        render: function(data, type, row) {
-            if (row.disponibilidad == 'disponible') {
-                return '<span class="badge badge-success">Disponible</span>';
-            } else {
-                return '<span class="badge badge-danger">Ocupada</span>';
-            }
-        }
-    },
-    {
         data: 'piso',
         name: 'piso',
         className: 'text-center'
@@ -92,7 +80,7 @@ var table = new DataTable('#datatable', {
     ],
     columnDefs: [{
         orderable: false,
-        targets: [7],
+        targets: [6],
         responsivePriority: 1,
         responsivePriority: 2,
 

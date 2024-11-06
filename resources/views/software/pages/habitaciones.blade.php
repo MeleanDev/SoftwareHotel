@@ -26,12 +26,11 @@
             <thead class="bg-info">
                 <tr>
                     <th data-priority="1">Identifiacador</th>
-                    <th data-priority="2">Disponibilidad</th>
                     <th>Piso</th>
                     <th>Tipo</th>
                     <th>Cant. Max</th>
                     <th>precio</th>
-                    <th>Sede</th>
+                    <th data-priority="2">Sede</th>
                     <th class="text-center">Accion</th>
                 </tr>
             </thead>

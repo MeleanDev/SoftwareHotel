@@ -18,10 +18,10 @@ class HabitacionClass
         return $datos;
     }
 
-    // public function listaModerador(){
-    //     $datos = $this->consultaDB->HabitacionesListaModerador();;
-    //     return $datos;
-    // }
+    public function listaModerador($sede){
+        $datos = $this->consultaDB->HabitacionesListaModerador($sede);
+        return $datos;
+    }
 
     public function crear($datos){
         $this->consultaDB->HabitacionesCrear($datos);

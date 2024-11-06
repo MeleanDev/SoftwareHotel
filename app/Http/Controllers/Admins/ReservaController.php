@@ -9,6 +9,8 @@ use App\Service\Admins\ReservaClass;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Auth;
+use Spatie\Permission\Traits\HasRoles;
 
 class ReservaController extends Controller
 {
@@ -26,7 +28,13 @@ class ReservaController extends Controller
 
     public function lista()
     {
-        $datos = $this->reservaClass->lista();
+        $user = Auth::user();
+        if ($user->hasRole('Administrador')) {
+            $datos = $this->reservaClass->listaAdmin();
+        }
+        if ($user->hasRole('Moderador')) {
+            $datos = $this->reservaClass->listaModerador($user->sede_id);
+        }
         return datatables()->of($datos)->toJson();
     }
 
@@ -106,7 +114,7 @@ class ReservaController extends Controller
         $this->reservaClass->Ocupar($id->habitacione_id);
         return response()->json(['success' => true]);
     }
-    
+
     public function completada(Reserva $id): JsonResponse
     {
         $id->estado = 'Completada';

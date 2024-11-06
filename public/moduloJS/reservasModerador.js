@@ -76,18 +76,13 @@ var table = new DataTable('#datatable', {
         className: 'text-center'
     },
     {
-        data: 'habitacione.identificador',
-        name: 'habitacione.identificador',
+        data: 'habitacione_id',
+        name: 'habitacione_id.',
         className: 'text-center'
     },
     {
-        data: 'habitacione.tipo',
-        name: 'habitacione.tipo',
-        className: 'text-center'
-    },
-    {
-        data: 'user.identificacion',
-        name: 'user.identificacion',
+        data: 'user_id',
+        name: 'user_id',
         className: 'text-center'
     },
     {
@@ -128,7 +123,7 @@ var table = new DataTable('#datatable', {
     ],
     columnDefs: [{
         orderable: false,
-        targets: [7],
+        targets: [6],
         responsivePriority: 1,
         responsivePriority: 2,
 

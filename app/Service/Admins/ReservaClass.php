@@ -23,8 +23,16 @@ class ReservaClass
         return $datos;
     }
 
-    public function lista(){
+    public function listaAdmin(){
         $datos = $this->consultaDB->ReservaListaAdmin();
+        return $datos;
+    }
+    public function listaModerador($sede){
+        $datos = $this->consultaDB->ReservasModeradorLista($sede);
+        foreach ($datos as $item) {
+            $item->user_id = $this->consultaDB->buscarUserID($item->user_id);
+            $item->habitacione_id = $this->consultaDB->buscarHabitacionID($item->habitacione_id);
+        }
         return $datos;
     }
 
