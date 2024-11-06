@@ -2,7 +2,6 @@ var token = $('meta[name="csrf-token"]').attr('content');
 var opcion;
 const urlCompleta = window.location.href;
 const selectHabitacion = $("#habitacione_id");
-const selectHuesped = $("#huesped_id");
 
 $(document).ready(function () {
 
@@ -97,7 +96,7 @@ var table = new DataTable('#datatable', {
     ],
     columnDefs: [{
         orderable: false,
-        targets: [7],
+        targets: [5],
         responsivePriority: 1,
         responsivePriority: 2,
 

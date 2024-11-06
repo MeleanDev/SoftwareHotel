@@ -4,12 +4,10 @@ namespace App\Http\Controllers\Huesped;
 
 use App\Http\Controllers\Controller;
 use App\Service\Huesped\misReservacionesClass;
-use Illuminate\Http\Request;
 use Illuminate\View\View;
 
-class MisReservaciones extends Controller
+class MisReservascionesController extends Controller
 {
-
     private $misReservas;
 
     public function __construct(misReservacionesClass $misReservas)
@@ -28,6 +26,4 @@ class MisReservaciones extends Controller
         $datos = $this->misReservas->lista();
         return datatables()->of($datos)->toJson();
     }
-
-    
 }

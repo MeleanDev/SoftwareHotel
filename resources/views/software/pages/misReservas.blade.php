@@ -2,8 +2,8 @@
 
 {{-- Customize layout sections --}}
 
-@section('subtitle', 'Administradores')
-@section('content_header_title', 'Administradores')
+@section('subtitle', 'Reservas')
+@section('content_header_title', 'Mis Reservas')
 @section('content_header_subtitle', 'Registros')
 
 {{-- plugins --}}

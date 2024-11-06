@@ -8,6 +8,7 @@ use App\Http\Controllers\Admins\HuespedController;
 use App\Http\Controllers\Admins\ModeradoreController;
 use App\Http\Controllers\Admins\ReservaController;
 use App\Http\Controllers\Admins\SedeController;
+use App\Http\Controllers\Huesped\MisReservascionesController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,7 +19,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::controller(ProfileController::class)->group(function () {
             Route::get('Perfil', 'edit')->name('profile.edit');
             Route::patch('Perfil', 'update')->name('profile.update');
-            // Route::delete('Perfil', 'destroy')->name('profile.destroy');
+            Route::delete('Perfil', 'destroy')->name('profile.destroy');
         });
     
         // Panel principal
@@ -97,7 +98,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         });
 
         // Mis Reservaciones
-        Route::controller(HuespedController::class)->middleware('can:reservashuesped')->group(function () {
+        Route::controller(MisReservascionesController::class)->middleware('can:reservashuesped')->group(function () {
             Route::get('MisReservas', 'index')->name('reservasHuesped');
             Route::get('MisReservas/Lista', 'lista');
             Route::post('MisReservas', 'crear');
