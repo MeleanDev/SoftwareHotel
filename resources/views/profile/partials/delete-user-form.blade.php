@@ -50,6 +50,13 @@
                     {{ __('Borrar cuenta') }}
                 </x-danger-button>
             </div>
+            <div class="flex items-center gap-4">
+                @if (session('status') === 'NoEliminado')
+                    <script>
+                        alert("No puedes eliminar tu cuenta si tienes reservaciones realizadas");
+                    </script>
+                @endif
+            </div>
         </form>
     </x-modal>
 </section>
