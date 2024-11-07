@@ -95,6 +95,18 @@ class ReservaController extends Controller
         return $repuesta;
     }
 
+    public function editar(ReservaRequest $datos, Reserva $id): JsonResponse
+    {
+        try {
+            $this->reservaClass->editar($datos, $id);
+            $repuesta = response()->json(['success' => true]);
+        } catch (\Throwable $th) {
+            $repuesta = response()->json(['error' => true]);
+        }
+
+        return $repuesta;
+    }
+
     public function cancelar(Reserva $id): JsonResponse
     {
         try {

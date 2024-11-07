@@ -241,7 +241,7 @@ class BDClass
         $rese->identificador = now()->timestamp * 1000;
         $rese->fecha_entrada = $datos['fecha_entrada'];
         $rese->fecha_salida = $datos['fecha_salida'];
-        $rese->habitacione_id = $datos['habitacione_id'];
+        $rese->habitacione()->associate($datos['habitacione_id']);
         $rese->user()->associate($user);
         $rese->save();
     }
@@ -264,8 +264,8 @@ class BDClass
     {
         $id->fecha_entrada = $datos['fecha_entrada'];
         $id->fecha_salida = $datos['fecha_salida'];
-        $id->habitacione_id = $datos['habitacione_id'];
-        $id->user_id = $datos['user_id'];
+        $id->habitacione()->associate($datos['habitacione_id']);
+        $id->user()->associate($datos['huesped_id']);
         $id->save();
     }
 
@@ -274,7 +274,7 @@ class BDClass
     {
         $id->fecha_entrada = $datos['fecha_entrada'];
         $id->fecha_salida = $datos['fecha_salida'];
-        $id->habitacione_id = $datos['habitacione_id'];
+        $id->habitacione()->associate($datos['habitacione_id']);
         $id->save();
     }
 

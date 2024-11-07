@@ -41,6 +41,10 @@ class ReservaClass
         return $datos;
     }
 
+    public function editar($datos, $id){
+        $datos = $this->consultaDB->ReservaEditar($datos, $id);
+    }
+
     public function verificarActiva($id){
         $datos = $this->consultaDB->ReservaVerificarActiva($id);
         if ($datos == true) {
