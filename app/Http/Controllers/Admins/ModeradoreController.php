@@ -54,9 +54,9 @@ class ModeradoreController extends Controller
     {
         try {
             $this->moderadorClass->crear($datos);
-            $repuesta = response()->json(['success' => true], 201);
+            $repuesta = response()->json(['success' => true]);
         } catch (\Throwable $th) {
-            $repuesta = response()->json(['error' => false], 400);
+            $repuesta = response()->json(['error' => false]);
         }
         return $repuesta;
     }
@@ -71,9 +71,9 @@ class ModeradoreController extends Controller
     {
         try {
             $this->moderadorClass->editar($datos, $id);
-            $repuesta = response()->json(['success' => true], 200);
+            $repuesta = response()->json(['success' => true]);
         } catch (\Throwable $th) {
-            $repuesta = response()->json(['error' => false], 400);
+            $repuesta = response()->json(['error' => false]);
         }
         return $repuesta;
     }

@@ -7,7 +7,6 @@ use App\Http\Requests\UserRequest;
 use App\Models\User;
 use App\Service\Admins\HuespedClass;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class HuespedController extends Controller
@@ -34,9 +33,9 @@ class HuespedController extends Controller
     {
         try {
             $this->huespedClass->crear($datos);
-            $repuesta = response()->json(['success' => true], 201);
+            $repuesta = response()->json(['success' => true]);
         } catch (\Throwable $th) {
-            $repuesta = response()->json(['error' => false], 400);
+            $repuesta = response()->json(['error' => false]);
         }
         return $repuesta;
     }
@@ -50,9 +49,9 @@ class HuespedController extends Controller
     {
         try {
             $this->huespedClass->editar($datos, $id);
-            $repuesta = response()->json(['success' => true], 200);
+            $repuesta = response()->json(['success' => true]);
         } catch (\Throwable $th) {
-            $repuesta = response()->json(['error' => false], 400);
+            $repuesta = response()->json(['error' => false]);
         }
         return $repuesta;
     }

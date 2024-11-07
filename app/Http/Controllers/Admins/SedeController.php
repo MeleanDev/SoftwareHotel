@@ -33,15 +33,9 @@ class SedeController extends Controller
     {
         try {
             $this->sedeClass->crear($datos);
-            $repuesta = response()->json([
-                'success' => true,
-                'msj' => 'Sede Creada con exito'
-            ], 201);
+            $repuesta = response()->json(['success' => true]);
         } catch (\Throwable $th) {
-            $repuesta = response()->json([
-                'error' => false,
-                'msj' => 'Error en los datos'
-            ], 400);
+            $repuesta = response()->json(['error' => false]);
         }
         return $repuesta;
     }
@@ -56,15 +50,9 @@ class SedeController extends Controller
     {
         try {
             $this->sedeClass->editar($datos, $id);
-            $repuesta = response()->json([
-                'success' => true,
-                'msj' => 'Datos de la sede editados con exito'
-            ], 200);
+            $repuesta = response()->json(['success' => true]);
         } catch (\Throwable $th) {
-            $repuesta = response()->json([
-                'error' => false,
-                'msj' => 'Error en la Modificacion'
-            ], 400);
+            $repuesta = response()->json(['error' => false]);
         }
         return $repuesta;
     }

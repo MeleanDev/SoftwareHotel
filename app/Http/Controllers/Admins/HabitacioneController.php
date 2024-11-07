@@ -60,9 +60,9 @@ class HabitacioneController extends Controller
     {
         try {
             $this->habitacioneClass->crear($datos);
-            $repuesta = response()->json(['success' => true], 201);
+            $repuesta = response()->json(['success' => true]);
         } catch (\Throwable $th) {
-            $repuesta = response()->json(['error' => false], 400);
+            $repuesta = response()->json(['error' => false]);
         }
         return $repuesta;
     }
@@ -71,15 +71,9 @@ class HabitacioneController extends Controller
     {
         try {
             $this->habitacioneClass->editar($datos, $id);
-            $repuesta = response()->json([
-                'success' => true,
-                'msj' => 'Datos de la habitacion editados con exito'
-            ], 200);
+            $repuesta = response()->json(['success' => true]);
         } catch (\Throwable $th) {
-            $repuesta = response()->json([
-                'error' => false,
-                'msj' => 'Error en la Modificacion'
-            ], 400);
+            $repuesta = response()->json(['error' => false]);
         }
         return $repuesta;
     }
@@ -87,8 +81,6 @@ class HabitacioneController extends Controller
     public function eliminar(Habitacione $id): JsonResponse
     {
         $id->delete();
-        return response()->json([
-            'success' => true,
-        ]);
+        return response()->json(['success' => true]);
     }
 }

@@ -33,9 +33,9 @@ class AdministradoreController extends Controller
     {
         try {
             $this->administradorClass->crear($datos);
-            $repuesta = response()->json(['success' => true], 201);
+            $repuesta = response()->json(['success' => true]);
         } catch (\Throwable $th) {
-            $repuesta = response()->json(['error' => false], 400);
+            $repuesta = response()->json(['error' => false]);
         }
         return $repuesta;
     }
@@ -49,9 +49,9 @@ class AdministradoreController extends Controller
     {
         try {
             $this->administradorClass->editar($datos, $id);
-            $repuesta = response()->json(['success' => true], 200);
+            $repuesta = response()->json(['success' => true]);
         } catch (\Throwable $th) {
-            $repuesta = response()->json(['error' => false], 400);
+            $repuesta = response()->json(['error' => false]);
         }
         return $repuesta;
     }
