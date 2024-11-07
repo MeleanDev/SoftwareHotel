@@ -61,6 +61,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
             Route::get('Reservas/Lista/Habitaciones', 'habitaciones');
             Route::get('Reservas/Lista/Huesped', 'huesped');
             Route::post('Reservas', 'crear');
+            Route::get('Reservas/{id}', 'detalle');
             Route::post('Reservas/Editar/{id}', 'editar');
             Route::get('Reservas/Cancelar/{id}', 'cancelar');
             Route::get('Reservas/Activar/{id}', 'activar');

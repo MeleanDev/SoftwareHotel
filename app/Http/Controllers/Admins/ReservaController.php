@@ -95,6 +95,11 @@ class ReservaController extends Controller
         return $repuesta;
     }
 
+    public function detalle(Reserva $id): JsonResponse
+    {
+        return response()->json($id);
+    }
+
     public function editar(ReservaRequest $datos, Reserva $id): JsonResponse
     {
         try {
