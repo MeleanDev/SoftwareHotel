@@ -51,7 +51,23 @@
                         </button>
                     </div>
                     <div class="modal-body text-center">
-                        
+                        <div class="form-group">
+                            <label for="habitacione_id">Habitacion</label>
+                            <select id="habitacione_id" required class="form-control">
+                            </select>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="fecha_entrada">Fecha Entrada</label>
+                                <input type="datetime-local" required class="form-control" id="fecha_entrada"
+                                    min="">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="fecha_salida">Fecha Salida</label>
+                                <input type="datetime-local" required class="form-control" id="fecha_salida" min=""
+                                    disabled>
+                            </div>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>

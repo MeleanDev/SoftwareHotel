@@ -100,7 +100,6 @@ class ReservaController extends Controller
         try {
             $id->estado = 'Cancelada';
             $id->save();
-            $this->reservaClass->habitacionLibre($id->habitacione_id);
             return response()->json(['success' => true]);
         } catch (\Throwable $th) {
             return response()->json(['error' => true]);

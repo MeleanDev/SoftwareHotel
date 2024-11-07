@@ -101,8 +101,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::controller(MisReservascionesController::class)->middleware('can:reservashuesped')->group(function () {
             Route::get('MisReservas', 'index')->name('reservasHuesped');
             Route::get('MisReservas/Lista', 'lista');
+            Route::get('MisReservas/Lista/Habitaciones', 'listaHabitaciones');
+            Route::get('MisReservas/{id}', 'detalle');
             Route::post('MisReservas', 'crear');
+            Route::post('MisReservas/Editar/{id}', 'editar');
             Route::get('MisReservas/Cancelar/{id}', 'cancelar');
         });
+
+        
     });
 });

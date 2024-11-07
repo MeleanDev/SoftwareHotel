@@ -18,6 +18,8 @@ $(document).ready(function () {
         }
     });
 
+
+
 });
 
 var table = new DataTable('#datatable', {
@@ -82,14 +84,14 @@ var table = new DataTable('#datatable', {
                                 <a class="dropdown-item" data-id="${row.id}" href="javascript:cancelar(${row.id});"><i class="fa fa-trash text-danger"></i> Cancelar</a>
                             </div>
                         </div>`
-                    } else if(row.estado === 'Activa'){ 
-                        return `
+            } else if (row.estado === 'Activa') {
+                return `
                         <span class="badge badge-success">Activa</span>`
-                    }else if(row.estado === 'Completada'){ 
-                        return `<span class="badge badge-info">Completada</span>`
-                    }if(row.estado === 'Cancelada'){ 
-                        return `<span class="badge badge-danger">Cancelada</span>`
-                    }
+            } else if (row.estado === 'Completada') {
+                return `<span class="badge badge-info">Completada</span>`
+            } if (row.estado === 'Cancelada') {
+                return `<span class="badge badge-danger">Cancelada</span>`
+            }
         },
         "orderable": false
     },
@@ -140,7 +142,6 @@ $('#formulario').submit(function (e) {
     e.preventDefault();
 
     var formData = new FormData(this);
-    formData.append('identificador', $.trim($('#identificador').val()));
     formData.append('fecha_entrada', $.trim($('#fecha_entrada').val()));
     formData.append('fecha_salida', $.trim($('#fecha_salida').val()));
     formData.append('habitacione_id', $.trim($('#habitacione_id').val()));
@@ -231,65 +232,59 @@ crear = function () {
     $("#titulo").attr("class", "modal-title text-white");
     $("#bg-titulo").attr("class", "modal-header bg-gradient-primary");
 
-    $("#identificador").attr("readonly", false);
-    $("#piso").attr("readonly", false);
-    $("#tipo").attr("readonly", false);
-    $("#numPersonas").attr("readonly", false);
-    $("#precio").attr("readonly", false);
-
-    $('#sede_idVer').attr('type', 'hidden');
-    $('#tipoVer').attr('type', 'hidden');
-    $('#tipo').show();
-    $('#sede_id').show();
-
     $('#submit').show()
     $('#modalCRUD').modal('show');
 };
 
+editar = async function (id) {
+    rutaAccion = urlCompleta + '/Editar/' + id;
+    accion = 2;
 
+    $('#fecha_salida').prop('disabled', true);
 
-// editar = async function(id) {
-//     rutaAccion = urlCompleta + '/Editar/' + id;
-//     accion = 2;
+    $('#fecha_entrada').on('change', function () {
+        $('#fecha_salida').prop('disabled', false);
+    });
 
-//     try {
-//         $("#formulario").trigger("reset");
-//         datos = await consulta(id);
-//         $("#titulo").html("Editar Habitacion -> " + datos.identificador);
-//         $("#titulo").attr("class", "modal-title text-white");
-//         $("#bg-titulo").attr("class", "modal-header bg-warning");
+    const now = new Date().toISOString().slice(0, 16);
+    $('#fecha_entrada').attr('min', now);
+    $('#fecha_salida').attr('min', now);
 
-//         // asigancion de valores
-//         $("#identificador").val(datos.identificador);
-//         $("#identificador").attr("readonly", false);
+    $('#fecha_salida').on('change', function () {
+        // Obtener las fechas de entrada y salida
+        var fechaEntrada = new Date($('#fecha_entrada').val());
+        var fechaSalida = new Date($(this).val());
 
-//         $("#piso").val(datos.piso);
-//         $("#piso").attr("readonly", false);
+        // Crear una nueva fecha que sea un día después de la fecha de entrada
+        var fechaEntradaMasUnDia = new Date(fechaEntrada);
+        fechaEntradaMasUnDia.setDate(fechaEntradaMasUnDia.getDate() + 1);
 
-//         $("#numPersonas").val(datos.numPersonas);
-//         $("#numPersonas").attr("readonly", false);
+        // Comparar las fechas
+        if (fechaSalida < fechaEntradaMasUnDia) {
+            alert('La fecha de salida debe ser al menos un día después de la fecha de entrada.');
+            $(this).val('');
+        }
+    });
 
-//         $("#precio").val(datos.precio);
-//         $("#precio").attr("readonly", false);
+    try {
+        $("#formulario").trigger("reset");
+        datos = await consulta(id);
+        $("#titulo").html("Editar Reserva -> " + datos.identificador);
+        $("#titulo").attr("class", "modal-title text-white");
+        $("#bg-titulo").attr("class", "modal-header bg-warning");
 
-//         $('#sede_idVer').attr('type', 'hidden');
-//         $("#sede_id").val(datos.sede.id);
-//         $('#sede_id').show();
+        // asigancion de valores
 
-//         $('#tipoVer').attr('type', 'hidden');
-//         $('#tipo').show();
-
-
-//         $('#submit').show()
-//         $('#modalCRUD').modal('show');
-//     } catch (error) {
-//         notificacion.fire({
-//             icon: "error",
-//             title: "¡ No Existe !",
-//             text: "Tu registro no se puede ver."
-//         });
-//     }
-// };
+        $('#submit').show()
+        $('#modalCRUD').modal('show');
+    } catch (error) {
+        notificacion.fire({
+            icon: "error",
+            title: "¡ No Existe !",
+            text: "Tu registro no se puede ver."
+        });
+    }
+};
 
 cancelar = function (id) {
     Swal.fire({

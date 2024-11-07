@@ -18,5 +18,18 @@ class misReservacionesClass
         return $datos;
     }
 
+    public function crear($datos){
+        $this->consultaDB->ReservaCrear($datos);
+    }
+
+    public function habitaciones(){
+        $datos = $this->consultaDB->habitacionesDisponibles();
+        return $datos;
+    }
+
+    public function editar($datos, $id){
+        $this->consultaDB->ReservaEditarHuesped($datos, $id);
+    }
+
     
 }
