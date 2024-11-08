@@ -46,7 +46,7 @@
         <div class="container-fluid bg-dark px-0">
             <div class="row gx-0">
                 <div class="col-lg-3 bg-dark d-none d-lg-block">
-                    <a href="index.html" class="navbar-brand w-100 h-100 m-0 p-0 d-flex align-items-center justify-content-center">
+                    <a href="#" class="navbar-brand w-100 h-100 m-0 p-0 d-flex align-items-center justify-content-center">
                         <img src="{{ asset('landing/img/logo.png') }}" width="150px"/>
                     </a>
                 </div>
@@ -73,7 +73,7 @@
                         </div>
                     </div>
                     <nav class="navbar navbar-expand-lg bg-dark navbar-dark p-3 p-lg-0">
-                        <a href="index.html" class="navbar-brand d-block d-lg-none">
+                        <a href="#" class="navbar-brand d-block d-lg-none">
                             <h1 class="m-0 text-primary text-uppercase"></h1>
                         </a>
                         <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
@@ -81,10 +81,10 @@
                         </button>
                         <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                             <div class="navbar-nav mr-auto py-0">
-                                <a href="index.html" class="nav-item nav-link active">Inicio</a>
+                                <a href="#" class="nav-item nav-link active">Inicio</a>
                                 <a href="#Nosotros" class="nav-item nav-link">Nosotros</a>
                                 <a href="#Servicios" class="nav-item nav-link">Servicios</a>
-                                <a href="room.html" class="nav-item nav-link">Habitaciones</a>
+                                <a href="#" class="nav-item nav-link">Habitaciones</a>
 
                                 <a href="contact.html" class="nav-item nav-link">Contactanos</a>
                             
@@ -124,8 +124,8 @@
                                 <div><img src="{{ asset('landing/img/logo.png') }}" width="200px"/></div>
                                 <h6 class="section-title text-white text-uppercase mb-3 animated slideInDown">Crown Plaza Maruma Hotel & Casino</h6>
                                 <h1 class="display-6 text-white mb-4 animated slideInDown">Vive una experiencia de lujo en nuestras instalaciones</h1>
-                                <a href="" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Habitaciones</a>
-                                <a href="" class="btn btn-light py-md-3 px-md-5 animated slideInRight">Reservar</a>
+                                <a href="{{route('login')}}" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Habitaciones</a>
+                                <a href="{{route('login')}}" class="btn btn-light py-md-3 px-md-5 animated slideInRight">Reservar</a>
                             </div>
                         </div>
                     </div>
@@ -280,7 +280,7 @@
                                     <small><i class="fa fa-wifi text-primary me-2"></i>Wifi</small>
                                 </div>
                                 <div class="d-flex justify-content-between">
-                                    <a class="btn btn-sm btn-primary rounded py-2 px-4" href="">Ver más</a>
+                                    <a class="btn btn-sm btn-primary rounded py-2 px-4" href="{{route('login')}}">Ver más</a>
                                     <a class="btn btn-sm btn-dark rounded py-2 px-4" href="{{route("login")}}">Reservar</a>
                                 </div>
                             </div>
@@ -309,7 +309,7 @@
                                     <small><i class="fa fa-wifi text-primary me-2"></i>Wifi</small>
                                 </div>
                                 <div class="d-flex justify-content-between">
-                                    <a class="btn btn-sm btn-primary rounded py-2 px-4" href="">Ver más</a>
+                                    <a class="btn btn-sm btn-primary rounded py-2 px-4" href="{{route('login')}}">Ver más</a>
                                     <a class="btn btn-sm btn-dark rounded py-2 px-4" href="{{route("login")}}">Reservar</a>
                                 </div>
                             </div>
@@ -338,7 +338,7 @@
                                     <small><i class="fa fa-wifi text-primary me-2"></i>Wifi</small>
                                 </div>
                                 <div class="d-flex justify-content-between">
-                                    <a class="btn btn-sm btn-primary rounded py-2 px-4" href="">Ver más</a>
+                                    <a class="btn btn-sm btn-primary rounded py-2 px-4" href="{{route('login')}}">Ver más</a>
                                     <a class="btn btn-sm btn-dark rounded py-2 px-4" href="{{route("login")}}">Reservar</a>
                                 </div>
                             </div>
@@ -359,7 +359,7 @@
                         <h6 class="section-title text-start text-white text-uppercase mb-3">Hospedaje de lujo</h6>
                         <h1 class="text-white mb-4">Descubre las instalaciones de lujo de nuestro hotel</h1>
                         <p class="text-white mb-4">Disfruta de una experiencia única en nuestras instalaciones de lujo, diseñadas para brindarte comodidad y elegancia en cada rincón. Relájate y déjate llevar por la atmósfera sofisticada, donde cada detalle ha sido pensado para que vivas momentos inolvidables.</p>
-                        <a href="" class="btn btn-primary py-md-3 px-md-5 me-3">Reservar</a>
+                        <a href="{{route('login')}}" class="btn btn-primary py-md-3 px-md-5 me-3">Reservar</a>
                        
                     </div>
                 </div>
@@ -477,7 +477,7 @@
         <!-- Newsletter Start -->
         <div class="container newsletter mt-5 wow fadeIn" data-wow-delay="0.1s">
             <div class="row justify-content-center">
-                <div class="col-lg-10 border rounded p-1">
+                {{-- <div class="col-lg-10 border rounded p-1">
                     <div class="border rounded text-center p-1">
                         <div class="bg-white rounded text-center p-5">
                             <h4 class="mb-4">Suscribete a nuestro <span class="text-primary text-uppercase">Newsletter</span></h4>
@@ -487,7 +487,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
             </div>
         </div>
         <!-- Newsletter Start -->

@@ -73,10 +73,9 @@
                                 <label for="tipo">Tipo</label>
                                 <input type="hidden" class="form-control" id="tipoVer" readonly>
                                 <select id="tipo" class="form-control">
-                                    <option selected value="Individual">Individual</option>
-                                    <option value="Familiar">Familiar</option>
-                                    <option value="Vip">Vip</option>
-                                    <option value="Presidencial">Presidencial</option>
+                                    <option selected value="Junior Suite">Junior Suite</option>
+                                    <option value="Executive Suite">Executive Suite</option>
+                                    <option value="Super Deluxe">Super Deluxe</option>
                                 </select>
                             </div>
                         </div>
