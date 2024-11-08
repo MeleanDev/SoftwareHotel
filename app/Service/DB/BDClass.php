@@ -3,11 +3,12 @@
 namespace App\Service\DB;
 
 use App\Models\Habitacione;
-use App\Models\MesesCantidad;
+use App\Models\Recibo;
 use App\Models\Reserva;
 use App\Models\Sede;
 use App\Models\Ubicacione;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -21,12 +22,6 @@ class BDClass
         $usu = User::find($id);
         return $usu;
     }
-
-    // public function disponibilidad($idhabitacion, $estado){
-    //     $habitacion = Habitacione::find($idhabitacion);
-    //     $habitacion->disponibilidad = $estado;
-    //     $habitacion->save();
-    // }
 
     // Sede
     // Lista
@@ -292,5 +287,40 @@ class BDClass
             $query->where('id', $sede);
         })->get();
         return $reservas;
+    }
+
+    // Recibo
+    // Lista
+    public function ReciboLista(){
+        $datos = Recibo::with('reserva')->get();
+        return $datos;
+    }
+
+    public function ReciboCrear($id){
+        $fecha_entrada = Carbon::parse($id->fecha_entrada);
+        $fecha_salida = Carbon::parse($id->fecha_salida);
+        $cantidadDias = $fecha_entrada->diffInDays($fecha_salida);
+        
+        $habitacion = Habitacione::find($id->habitacione_id);
+        $precio = $habitacion->precio;
+
+        $timestamp = now()->timestamp;
+        $fecha_formateada = Carbon::createFromTimestamp($timestamp)->format('Y-m-d H:i:s');
+        
+        $recibo = new Recibo();
+        $recibo->identificador = now()->timestamp * 1000;
+        $recibo->descripcion = 'Confirmada';
+        $recibo->estado = 'Realizada';
+        $recibo->fecha_emision = $fecha_formateada;
+        $recibo->monto = $precio * $cantidadDias;
+        $recibo->reserva()->associate($id);
+        $recibo->save();
+    }
+
+    // Anular
+    public function ReciboAnular($datos, $id){
+        $id->estado = 'Cancelada';
+        $id->descripcion = $datos['descipcion'];
+        $id->save();
     }
 }

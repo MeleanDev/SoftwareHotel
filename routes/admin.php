@@ -115,6 +115,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::controller(ReciboController::class)->middleware('can:habitacionesEstado')->group(function () {
             Route::get('Recibos', 'index')->name('recibos');
             Route::get('Recibos/Lista', 'lista');
+            Route::get('Recibos/Descargar/{id}', 'descargar');
+            Route::post('Recibos/{id}', 'anular');
         });
 
     });

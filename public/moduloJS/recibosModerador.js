@@ -20,31 +20,36 @@ var table = new DataTable('#datatable', {
         name: 'estado',
         className: 'text-center',
         render: function (data, type, row) {
-            if (row.estado === 'Realizada') {
-                return '<span class="badge badge-warning">Realizada</span>';
-            } else if (row.estado == 'Anulada') {
-                return '<span class="badge badge-success">Anulada</span>';
+            if (row.estado === 'En Proceso') {
+                return '<span class="badge badge-warning">En Proceso</span>';
+            } else if (row.estado == 'Activa') {
+                return '<span class="badge badge-success">Activa</span>';
+            } else if (row.estado == 'Completada') {
+                return '<span class="badge badge-info">Completada</span>';
+            }
+            else {
+                return '<span class="badge badge-danger">Cancelada</span>';
             }
         }
     },
     {
-        data: 'fecha_emision',
-        name: 'fecha_emision',
+        data: 'fecha_entrada',
+        name: 'fecha_entrada',
         className: 'text-center'
     },
     {
-        data: 'monto',
-        name: 'monto',
+        data: 'fecha_salida',
+        name: 'fecha_salida',
         className: 'text-center'
     },
     {
-        data: 'reserva.identificador',
-        name: 'reserva.identificador',
+        data: 'habitacione.identificador',
+        name: 'habitacione.identificador',
         className: 'text-center'
     },
     {
-        data: 'descripcion',
-        name: 'descripcion',
+        data: 'habitacione.tipo',
+        name: 'habitacione.tipo',
         className: 'text-center'
     },
     {
@@ -57,18 +62,31 @@ var table = new DataTable('#datatable', {
         "width": "100px",
         "className": "text-center",
         "render": function (row) {
-            if (row.estado === 'Realizada') {
+            if (row.estado === 'En Proceso') {
                 return `
                         <div class="dropdown dropleft">
                             <button class="btn btn-link text-secondary mb-0 dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fa fa-ellipsis-v text-xs"></i>
                             </button>
                             <div class="dropdown-menu dropdown-menu-sm" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" data-id="${row.id}" href="javascript:editar(${row.id});"><i class="fa fa-edit text-warning"></i> Editar</a>
                                 <a class="dropdown-item" data-id="${row.id}" href="javascript:cancelar(${row.id});"><i class="fa fa-trash text-danger"></i> Cancelar</a>
-                                <a class="dropdown-item" data-id="${row.id}" href="javascript:descargar(${row.id});"><i class="fa fa-trash text-success"></i> Descargarss</a>
+                                <a class="dropdown-item" data-id="${row.id}" href="javascript:activar(${row.id});"><i class="fa fa-trash text-success"></i> Activar</a>
                             </div>
                         </div>`
-            }else if (row.estado === 'Cancelada') {
+            } else if (row.estado === 'Activa') {
+                return `
+                        <div class="dropdown dropleft">
+                            <button class="btn btn-link text-secondary mb-0 dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fa fa-ellipsis-v text-xs"></i>
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-sm" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" data-id="${row.id}" href="javascript:completar(${row.id});"><i class="fa fa-trash text-info"></i> Completada</a>
+                            </div>
+                        </div>`
+            } else if (row.estado === 'Completada') {
+                return `<span class="badge badge-info">Completada</span>`
+            } if (row.estado === 'Cancelada') {
                 return `<span class="badge badge-danger">Cancelada</span>`
             }
         },

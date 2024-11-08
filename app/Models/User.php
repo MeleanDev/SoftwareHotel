@@ -49,11 +49,6 @@ class User extends Authenticatable
         return $this->belongsTo(Sede::class);
     }
 
-    public function rol(): BelongsTo 
-    {
-        return $this->belongsTo(Role::class);
-    }
-
     /**
      * Get the attributes that should be cast.
      *

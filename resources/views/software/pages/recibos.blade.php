@@ -22,12 +22,11 @@
                 <thead class="bg-info">
                     <tr>
                         <th data-priority="1">Identifiacador</th>
-                        <th data-priority="2">Estado</th>
-                        <th>Fecha Entrada</th>
-                        <th>Fecha Salida</th>
-                        <th>Habitacion</th>
-                        <th>Tip. Habitacion</th>
-                        <th>Huesped</th>
+                        <th data-priority="2">Huesped</th>
+                        <th>Fecha Emision</th>
+                        <th>Monto</th>
+                        <th>ID reserva</th>
+                        <th>Sede</th>
                         <th class="text-center">Accion</th>
                     </tr>
                 </thead>
@@ -41,11 +40,10 @@
                 <thead class="bg-info">
                     <tr>
                         <th data-priority="1">Identifiacador</th>
-                        <th data-priority="2">Estado</th>
-                        <th>Fecha Entrada</th>
-                        <th>Fecha Salida</th>
-                        <th>Habitacion</th>
-                        <th>Huesped</th>
+                        <th data-priority="2">Huesped</th>
+                        <th>Fecha Emision</th>
+                        <th>Monto</th>
+                        <th>ID reserva</th>
                         <th class="text-center">Accion</th>
                     </tr>
                 </thead>
@@ -65,5 +63,10 @@
 @endpush
 
 @push('js')
-    <script src="{{ asset('moduloJS/recibos.js') }}"></script>
+    @role('Administrador')
+        <script src="{{ asset('moduloJS/recibos.js') }}"></script>
+    @endrole
+    @role('Moderador')
+        <script src="{{ asset('moduloJS/recibosModerador.js') }}"></script>
+    @endrole
 @endpush
