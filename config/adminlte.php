@@ -361,12 +361,12 @@ return [
             'icon' => 'fas fa-address-book',
             'can' => 'huesped',
         ],
-        // [
-        //     'text' => 'Recibos',
-        //     'route' => 'recibos',
-        //     'icon' => 'fas fa-file-alt',
-        //     'can' => 'habitacionesEstado',
-        // ],
+        [
+            'text' => 'Recibos',
+            'route' => 'recibos',
+            'icon' => 'fas fa-file-alt',
+            'can' => 'habitacionesEstado',
+        ],
         [
             'text' => 'Ver mis Reservas',
             'route' => 'reservasHuesped',
@@ -421,28 +421,28 @@ return [
             'files' => [
                 [
                     'type' => 'js',
-                    'asset' => false,
-                    'location' => 'https://cdn.datatables.net/2.0.3/js/dataTables.min.js',
+                    'asset' => true,
+                    'location' => 'adminlte/DataTable/dataTables.min.js',
                 ],
                 [
                     'type' => 'js',
-                    'asset' => false,
-                    'location' => 'https://cdn.datatables.net/2.0.3/js/dataTables.bootstrap4.min.js',
+                    'asset' => true,
+                    'location' => 'adminlte/DataTable/dataTables.bootstrap4.min.js',
                 ],
                 [
                     'type' => 'js',
-                    'asset' => false,
-                    'location' => 'https://cdn.datatables.net/responsive/3.0.2/js/dataTables.responsive.js',
+                    'asset' => true,
+                    'location' => 'adminlte/DataTable/dataTables.responsive.js',
                 ],
                 [
                     'type' => 'css',
-                    'asset' => false,
-                    'location' => 'https://cdn.datatables.net/2.0.3/css/dataTables.bootstrap4.min.css',
+                    'asset' => true,
+                    'location' => 'adminlte/DataTable/dataTables.bootstrap4.min.css',
                 ],
                 [
                     'type' => 'css',
-                    'asset' => false,
-                    'location' => 'https://cdn.datatables.net/responsive/3.0.2/css/responsive.bootstrap4.css',
+                    'asset' => true,
+                    'location' => 'adminlte/DataTable/responsive.bootstrap4.css',
                 ],
             ],
         ],
@@ -451,13 +451,13 @@ return [
             'files' => [
                 [
                     'type' => 'js',
-                    'asset' => false,
-                    'location' => 'https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js',
+                    'asset' => true,
+                    'location' => 'adminlte/Select2/select2.min.js',
                 ],
                 [
                     'type' => 'css',
-                    'asset' => false,
-                    'location' => 'https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css',
+                    'asset' => true,
+                    'location' => 'adminlte/Select2/select2.min.css',
                 ],
             ],
         ],
@@ -476,8 +476,8 @@ return [
             'files' => [
                 [
                     'type' => 'js',
-                    'asset' => false,
-                    'location' => 'https://cdn.jsdelivr.net/npm/sweetalert2@11',
+                    'asset' => true,
+                    'location' => 'adminlte/Sweetalert2/sweetalert2@11',
                 ],
             ],
         ],
@@ -486,8 +486,8 @@ return [
             'files' => [
                 [
                     'type' => 'js',
-                    'asset' => false,
-                    'location' => 'https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js',
+                    'asset' => true,
+                    'location' => 'adminlte/Jqury/jquery.min.js',
                 ],
             ],
         ],

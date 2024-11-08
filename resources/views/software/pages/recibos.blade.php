@@ -2,8 +2,8 @@
 
 {{-- Customize layout sections --}}
 
-@section('subtitle', 'Reservas')
-@section('content_header_title', 'Reservas')
+@section('subtitle', 'Recibos')
+@section('content_header_title', 'Recibos')
 @section('content_header_subtitle', 'Registros')
 
 {{-- plugins --}}
@@ -53,31 +53,6 @@
                 </tbody>
             </table>
         @endrole
-    </div>
-
-    <!-- Modal -->
-    <div class="modal fade" id="modalCRUD" tabindex="-1" role="dialog" aria-labelledby="empleado" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document" style="min-width: 600px">
-            <div class="modal-content">
-                <form id="formulario" enctype="multipart/form-data">
-                    @csrf
-                    <div class="modal-header" id="bg-titulo">
-                        <h5 class="modal-title" id="titulo"></h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body text-center">
-
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-                        <button type="submit" id="submit" class="btn btn-primary"><i class="fas fa-lg fa-save"></i>
-                            Guarda</button>
-                    </div>
-                </form>
-            </div>
-        </div>
     </div>
 @stop
 

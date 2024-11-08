@@ -73,11 +73,11 @@
                         </div>
                         <div class="form-group">
                             <label for="email">Email</label>
-                            <input type="text" required minlength="1" maxlength="255" class="form-control" id="email" placeholder="Email">
+                            <input type="email" required minlength="1" maxlength="255" class="form-control" id="email" placeholder="Email">
                         </div>
                         <div class="form-group">
                             <label for="password">Password</label>
-                            <input type="password" required minlength="1" maxlength="255" class="form-control" id="password" placeholder="Password">
+                            <input type="password" required minlength="8" maxlength="255" class="form-control" id="password" placeholder="Password">
                         </div>
                     </div>
                     <div class="modal-footer">

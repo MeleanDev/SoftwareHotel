@@ -155,7 +155,7 @@ $('#formulario').submit(function (e) {
                 notificacion.fire({
                     icon: "error",
                     title: "Registro no cargado.",
-                    text: "Recuerda que no pueden haber 2 usuario con el mismo Identificador."
+                    text: "Recuerda que no pueden haber 2 usuario con el mismo Identificador, Correo o Telefono."
                 });
             }
         },
@@ -255,8 +255,8 @@ eliminar = function(id) {
                 },
                 error: function(xhr, status, error) {
                     Swal.fire({
-                        title: "Error en el sistema",
-                        text: "El registro no fue agregado al sistema!!",
+                        title: "No eliminado",
+                        text: "Tu registro no fue eliminado porque tiene una relacion",
                         icon: "error"
                     });
                 }
