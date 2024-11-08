@@ -64,8 +64,9 @@
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label for="telefono">Telefono</label>
-                                <input type="text" required minlength="1" maxlength="20" class="form-control" id="telefono" placeholder="Telefono">
+                                <input type="tel" required minlength="1" maxlength="20" class="form-control" id="telefono" placeholder="Telefono">
                             </div>
+
                             <div class="form-group col-md-6">
                                 <label for="identificacion">Identificacion</label>
                                 <input type="text" required minlength="1" maxlength="20" class="form-control" id="identificacion" placeholder="Identificacion">

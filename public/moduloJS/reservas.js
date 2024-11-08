@@ -233,6 +233,7 @@ crear = function () {
     $('#fecha_salida').prop('disabled', true);
 
     $('#fecha_entrada').on('change', function () {
+        $('#fecha_entrada').prop('disabled', true);
         $('#fecha_salida').prop('disabled', false);
     });
 
@@ -286,6 +287,7 @@ editar = async function (id) {
     $('#fecha_salida').prop('disabled', true);
 
     $('#fecha_entrada').on('change', function () {
+        $('#fecha_entrada').prop('disabled', true);
         $('#fecha_salida').prop('disabled', false);
     });
 

@@ -18,6 +18,19 @@ $(document).ready(function () {
             });
         }
     });
+
+    $('#nombre').on('input', function() {
+        $(this).val($(this).val().replace(/\d/g, ''));
+      });
+      $('#apellido').on('input', function() {
+          $(this).val($(this).val().replace(/\d/g, ''));
+      });
+      $('#telefono').on('input', function() {
+          $(this).val($(this).val().replace(/[^0-9]/g, ''));
+      });
+      $('#email').on('input', function() {
+          $(this).val($(this).val().replace(/\s+/g, ''));
+      });
 });
 
 var table = new DataTable('#datatable', {

@@ -228,6 +228,7 @@ crear = function () {
     $('#fecha_salida').prop('disabled', true);
 
     $('#fecha_entrada').on('change', function () {
+        $('#fecha_entrada').prop('disabled', true);
         $('#fecha_salida').prop('disabled', false);
     });
 
@@ -276,9 +277,36 @@ crear = function () {
 
 
 
-editar = async function(id) {
+editar = async function (id) {
     rutaAccion = urlCompleta + '/Editar/' + id;
     accion = 2;
+
+    $('#fecha_salida').prop('disabled', true);
+
+    $('#fecha_entrada').on('change', function () {
+        $('#fecha_entrada').prop('disabled', true);
+        $('#fecha_salida').prop('disabled', false);
+    });
+
+    const now = new Date().toISOString().slice(0, 16);
+    $('#fecha_entrada').attr('min', now);
+    $('#fecha_salida').attr('min', now);
+
+    $('#fecha_salida').on('change', function () {
+        // Obtener las fechas de entrada y salida
+        var fechaEntrada = new Date($('#fecha_entrada').val());
+        var fechaSalida = new Date($(this).val());
+
+        // Crear una nueva fecha que sea un día después de la fecha de entrada
+        var fechaEntradaMasUnDia = new Date(fechaEntrada);
+        fechaEntradaMasUnDia.setDate(fechaEntradaMasUnDia.getDate() + 1);
+
+        // Comparar las fechas
+        if (fechaSalida < fechaEntradaMasUnDia) {
+            alert('La fecha de salida debe ser al menos un día después de la fecha de entrada.');
+            $(this).val('');
+        }
+    });
 
     try {
         $("#formulario").trigger("reset");
@@ -286,27 +314,6 @@ editar = async function(id) {
         $("#titulo").html("Editar Reserva -> " + datos.identificador);
         $("#titulo").attr("class", "modal-title text-white");
         $("#bg-titulo").attr("class", "modal-header bg-warning");
-
-        // asigancion de valores
-        $("#identificador").val(datos.identificador);
-        $("#identificador").attr("readonly", false);
-
-        $("#piso").val(datos.piso);
-        $("#piso").attr("readonly", false);
-
-        $("#numPersonas").val(datos.numPersonas);
-        $("#numPersonas").attr("readonly", false);
-
-        $("#precio").val(datos.precio);
-        $("#precio").attr("readonly", false);
-
-        $('#sede_idVer').attr('type', 'hidden');
-        $("#sede_id").val(datos.sede.id);
-        $('#sede_id').show();
-
-        $('#tipoVer').attr('type', 'hidden');
-        $('#tipo').show();
-
 
         $('#submit').show()
         $('#modalCRUD').modal('show');

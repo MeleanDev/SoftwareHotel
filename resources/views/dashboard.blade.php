@@ -12,13 +12,13 @@
 @section('content_body')
     <div class="container">
         @role('Administrador')
-            @include('software.componet.adminView');
+            @include('software.componet.adminView').
         @endrole
         @role('Moderador')
-            @include('software.componet.moderadorView');
+            @include('software.componet.moderadorView').
         @endrole
         @role('Huesped')
-            @include('software.componet.huespedView');
+            @include('software.componet.huespedView').
         @endrole
         <div class="Bienvenida">
             <div class="col-lg-10 mb-4 order-0 mx-auto">

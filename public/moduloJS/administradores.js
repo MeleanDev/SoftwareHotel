@@ -2,6 +2,21 @@ var token = $('meta[name="csrf-token"]').attr('content');
 var opcion;
 const urlCompleta = window.location.href;
 
+$(document).ready(function() {
+    $('#nombre').on('input', function() {
+      $(this).val($(this).val().replace(/\d/g, ''));
+    });
+    $('#apellido').on('input', function() {
+        $(this).val($(this).val().replace(/\d/g, ''));
+    });
+    $('#telefono').on('input', function() {
+        $(this).val($(this).val().replace(/[^0-9]/g, ''));
+    });
+    $('#email').on('input', function() {
+        $(this).val($(this).val().replace(/\s+/g, ''));
+    });
+  });
+
 var table = new DataTable('#datatable', {
     ajax: urlCompleta + '/Lista',
     responsive: true,

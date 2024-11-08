@@ -7,6 +7,7 @@ use App\Http\Controllers\Admins\HabitacionEstadoController;
 use App\Http\Controllers\Admins\HuespedController;
 use App\Http\Controllers\Admins\ModeradoreController;
 use App\Http\Controllers\Admins\ReservaController;
+use App\Http\Controllers\ReciboController;
 use App\Http\Controllers\Admins\SedeController;
 use App\Http\Controllers\Huesped\MisReservascionesController;
 use App\Http\Controllers\ProfileController;
@@ -108,6 +109,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
             Route::post('MisReservas', 'crear');
             Route::post('MisReservas/Editar/{id}', 'editar');
             Route::get('MisReservas/Cancelar/{id}', 'cancelar');
+        });
+
+        // Recibos
+        Route::controller(ReciboController::class)->middleware('can:habitacionesEstado')->group(function () {
+            Route::get('Recibos', 'index')->name('recibos');
+            Route::get('Recibos/Lista', 'lista');
         });
 
     });

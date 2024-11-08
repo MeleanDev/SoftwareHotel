@@ -361,6 +361,12 @@ return [
             'icon' => 'fas fa-address-book',
             'can' => 'huesped',
         ],
+        // [
+        //     'text' => 'Recibos',
+        //     'route' => 'recibos',
+        //     'icon' => 'fas fa-file-alt',
+        //     'can' => 'habitacionesEstado',
+        // ],
         [
             'text' => 'Ver mis Reservas',
             'route' => 'reservasHuesped',
