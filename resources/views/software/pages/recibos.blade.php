@@ -22,10 +22,12 @@
                 <thead class="bg-info">
                     <tr>
                         <th data-priority="1">Identifiacador</th>
-                        <th data-priority="2">Huesped</th>
+                        <th>Estado</th>
+                        <th>Descripcion</th>
                         <th>Fecha Emision</th>
                         <th>Monto</th>
                         <th>ID reserva</th>
+                        <th data-priority="2">Huesped</th>
                         <th>Sede</th>
                         <th class="text-center">Accion</th>
                     </tr>
@@ -40,10 +42,12 @@
                 <thead class="bg-info">
                     <tr>
                         <th data-priority="1">Identifiacador</th>
-                        <th data-priority="2">Huesped</th>
+                        <th>Estado</th>
+                        <th>Descripcion</th>
                         <th>Fecha Emision</th>
                         <th>Monto</th>
                         <th>ID reserva</th>
+                        <th data-priority="2">Huesped</th>
                         <th class="text-center">Accion</th>
                     </tr>
                 </thead>

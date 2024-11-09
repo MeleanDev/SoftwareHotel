@@ -226,6 +226,7 @@ crear = function () {
     accion = 1;
 
     $('#fecha_salida').prop('disabled', true);
+    $('#fecha_entrada').prop('disabled', false);
 
     $('#fecha_entrada').on('change', function () {
         $('#fecha_entrada').prop('disabled', true);
@@ -282,6 +283,7 @@ editar = async function (id) {
     accion = 2;
 
     $('#fecha_salida').prop('disabled', true);
+    $('#fecha_entrada').prop('disabled', false);
 
     $('#fecha_entrada').on('change', function () {
         $('#fecha_entrada').prop('disabled', true);

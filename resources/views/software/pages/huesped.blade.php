@@ -27,8 +27,8 @@
                 <tr>
                     <th data-priority="1">Nombre</th>
                     <th>Apellido</th>
-                    <th>Telefono</th>
                     <th data-priority="2">Identificacion</th>
+                    <th>Telefono</th>
                     <th>Email</th>
                     <th class="text-center">Accion</th>
                 </tr>

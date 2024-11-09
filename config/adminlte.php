@@ -477,7 +477,7 @@ return [
                 [
                     'type' => 'js',
                     'asset' => true,
-                    'location' => 'adminlte/Sweetalert2/sweetalert2@11',
+                    'location' => 'adminlte/Sweetalert2/sweetalert2@11.js',
                 ],
             ],
         ],

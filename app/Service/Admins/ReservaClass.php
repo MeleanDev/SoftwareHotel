@@ -63,4 +63,8 @@ class ReservaClass
         $this->consultaDB->HabitacionesEstado($id, 'Ocupada');
     }
 
+    public function recibo($id){
+        $this->consultaDB->ReciboCrear($id);
+    }
+
 }

@@ -28,6 +28,11 @@ var table = new DataTable('#datatable', {
         }
     },
     {
+        data: 'descripcion',
+        name: 'descripcion',
+        className: 'text-center'
+    },
+    {
         data: 'fecha_emision',
         name: 'fecha_emision',
         className: 'text-center'
@@ -43,13 +48,13 @@ var table = new DataTable('#datatable', {
         className: 'text-center'
     },
     {
-        data: 'descripcion',
-        name: 'descripcion',
+        data: 'user.identificacion',
+        name: 'user.identificacion',
         className: 'text-center'
     },
     {
-        data: 'user.identificacion',
-        name: 'user.identificacion',
+        data: 'sede.nombre',
+        name: 'sede.nombre',
         className: 'text-center'
     },
     {
@@ -77,7 +82,7 @@ var table = new DataTable('#datatable', {
     ],
     columnDefs: [{
         orderable: false,
-        targets: [7],
+        targets: [8],
         responsivePriority: 1,
         responsivePriority: 2,
 

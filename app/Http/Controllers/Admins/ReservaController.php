@@ -135,6 +135,7 @@ class ReservaController extends Controller
     {
         $id->estado = 'Completada';
         $id->save();
+        $this->reservaClass->recibo($id);
         $this->reservaClass->habitacionLibre($id->habitacione_id);
         return response()->json(['success' => true]);
     }
