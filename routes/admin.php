@@ -9,6 +9,7 @@ use App\Http\Controllers\Admins\ModeradoreController;
 use App\Http\Controllers\Admins\ReservaController;
 use App\Http\Controllers\ReciboController;
 use App\Http\Controllers\Admins\SedeController;
+use App\Http\Controllers\Huesped\MisReciboController;
 use App\Http\Controllers\Huesped\MisReservascionesController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -22,7 +23,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
             Route::patch('Perfil', 'update')->name('profile.update');
             Route::delete('Perfil', 'destroy')->name('profile.destroy');
         });
-    
+
         // Panel principal
         Route::controller(DashboardController::class)->group(function () {
             Route::get('Dashboard', 'index')->name('dashboard');
@@ -47,13 +48,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
             Route::get('Habitaciones/{id}', 'detalle');
             Route::post('Habitaciones/Editar/{id}', 'editar');
             Route::delete('Habitaciones/{id}', 'eliminar');
-        }); 
+        });
 
         // Habitaciones Estado
         Route::controller(HabitacionEstadoController::class)->middleware('can:habitacionesEstado')->group(function () {
             Route::get('HabitacionesEstado', 'index')->name('habitacionesEstado');
             Route::get('HabitacionesEstado/Lista', 'lista');
-        }); 
+        });
 
         // reserva
         Route::controller(ReservaController::class)->middleware('can:reservas')->group(function () {
@@ -67,6 +68,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
             Route::get('Reservas/Cancelar/{id}', 'cancelar');
             Route::get('Reservas/Activar/{id}', 'activar');
             Route::get('Reservas/Completada/{id}', 'completada');
+        });
+
+        // Recibos
+        Route::controller(ReciboController::class)->middleware('can:habitacionesEstado')->group(function () {
+            Route::get('Recibos', 'index')->name('recibos');
+            Route::get('Recibos/Lista', 'lista');
+            Route::get('Recibos/Descargar/{id}', 'descargar');
+            Route::get('Recibos/Anular/{id}', 'anular');
         });
 
         // Administradores
@@ -111,13 +120,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
             Route::get('MisReservas/Cancelar/{id}', 'cancelar');
         });
 
-        // Recibos
-        Route::controller(ReciboController::class)->middleware('can:habitacionesEstado')->group(function () {
-            Route::get('Recibos', 'index')->name('recibos');
-            Route::get('Recibos/Lista', 'lista');
-            Route::get('Recibos/Descargar/{id}', 'descargar');
-            Route::get('Recibos/Anular/{id}', 'anular');
+        // Mis Recibos
+        Route::controller(MisReciboController::class)->middleware('can:misRecibos')->group(function () {
+            Route::get('MisRecibos', 'index')->name('misRecibos');
+            Route::get('MisRecibos/Lista', 'lista');
+            Route::get('MisRecibos/Descargar/{id}', 'descargar');
         });
-
     });
 });

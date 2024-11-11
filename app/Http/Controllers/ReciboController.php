@@ -69,7 +69,7 @@ class ReciboController extends Controller
             $tipo = $habitacion->tipo;
             $cantidad = $cantidadDias;
             $precioUnit = $habitacion->precio;
-            $totalAPagar = $precioUnit * $cantidadDias;
+            $totalAPagar = $id->monto;
 
             $pdf = Pdf::loadView('software.componet.recibo', [
                 'identificacionRecibo' => $identificacionRecibo,

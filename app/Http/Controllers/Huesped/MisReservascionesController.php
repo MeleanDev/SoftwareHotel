@@ -19,7 +19,6 @@ class MisReservascionesController extends Controller
         $this->misReservas = $misReservas;
     }
 
-
     public function index(): View
     {
         return view('software.pages.misReservas');

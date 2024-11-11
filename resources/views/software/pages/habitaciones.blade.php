@@ -66,7 +66,7 @@
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label for="piso">Piso</label>
-                                <input type="number" required min="1" max="100" class="form-control"
+                                <input type="number" required min="1" minlength="1" minlength="3" max="100" class="form-control"
                                     id="piso">
                             </div>
                             <div class="form-group col-md-6">
@@ -82,7 +82,7 @@
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label for="numPersonas">Cantidad Max de personas</label>
-                                <input type="number" required min="1" max="999" class="form-control"
+                                <input type="number" required min="1" minlength="1" minlength="3" max="999" class="form-control"
                                     id="numPersonas">
                             </div>
                             <div class="form-group col-md-6">

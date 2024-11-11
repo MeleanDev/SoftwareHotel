@@ -344,16 +344,22 @@ return [
             'icon' => 'fas fa-clipboard-list',
         ],
         [
+            'text' => 'Recibos',
+            'route' => 'recibos',
+            'icon' => 'fas fa-file-alt',
+            'can' => 'recibos',
+        ],
+        [
             'text' => 'Ver mis Reservas',
             'route' => 'reservasHuesped',
             'icon' => 'fas fa-book',
             'can' => 'reservashuesped',
         ],
         [
-            'text' => 'Recibos',
-            'route' => 'recibos',
+            'text' => 'Mis Recibos',
+            'route' => 'misRecibos',
             'icon' => 'fas fa-file-alt',
-            'can' => 'habitacionesEstado',
+            'can' => 'misRecibos',
         ],
         [
             'text' => 'Administradores',

@@ -25,11 +25,13 @@ class DatabaseSeeder extends Seeder
         Permission::create(['name' => 'habitacionesEstado'])->syncRoles([$admin, $moderador]);
         Permission::create(['name' => 'huesped'])->syncRoles([$admin, $moderador]);
         Permission::create(['name' => 'reservas'])->syncRoles([$admin, $moderador]);
+        Permission::create(['name' => 'recibos'])->syncRoles([$admin, $moderador]);
         Permission::create(['name' => 'sedes'])->assignRole($admin);
         Permission::create(['name' => 'habitaciones'])->assignRole($admin);
         Permission::create(['name' => 'moderadores'])->assignRole($admin);
         Permission::create(['name' => 'administradores'])->assignRole($admin);
         Permission::create(['name' => 'reservashuesped'])->assignRole($huesped);
+        Permission::create(['name' => 'misRecibos'])->assignRole($huesped);
 
         User::factory()->create([
             'name' => 'admin',

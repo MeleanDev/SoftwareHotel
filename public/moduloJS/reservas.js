@@ -471,8 +471,8 @@ function SelectHuesped() {
         type: 'GET',
         dataType: "json",
         success: function (data) {
+            selectHuesped.empty();
             data.forEach(function (item) {
-                selectHuesped.empty();
                 const optionHuesped = new Option(item.huespedText, item.huespedId);
                 selectHuesped.append(optionHuesped);
             });
