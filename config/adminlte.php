@@ -344,6 +344,18 @@ return [
             'icon' => 'fas fa-clipboard-list',
         ],
         [
+            'text' => 'Ver mis Reservas',
+            'route' => 'reservasHuesped',
+            'icon' => 'fas fa-book',
+            'can' => 'reservashuesped',
+        ],
+        [
+            'text' => 'Recibos',
+            'route' => 'recibos',
+            'icon' => 'fas fa-file-alt',
+            'can' => 'habitacionesEstado',
+        ],
+        [
             'text' => 'Administradores',
             'route' => 'administradores',
             'can' => 'administradores',
@@ -360,18 +372,6 @@ return [
             'route' => 'huesped',
             'icon' => 'fas fa-address-book',
             'can' => 'huesped',
-        ],
-        [
-            'text' => 'Recibos',
-            'route' => 'recibos',
-            'icon' => 'fas fa-file-alt',
-            'can' => 'habitacionesEstado',
-        ],
-        [
-            'text' => 'Ver mis Reservas',
-            'route' => 'reservasHuesped',
-            'icon' => 'fas fa-book',
-            'can' => 'reservashuesped',
         ],
         ['header' => 'account_settings'],
         [

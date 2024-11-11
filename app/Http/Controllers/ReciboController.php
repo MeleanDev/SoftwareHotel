@@ -34,49 +34,53 @@ class ReciboController extends Controller
         return datatables()->of($datos)->toJson();
     }
 
-    public function descargar(Recibo $id) {
-        $reserva = Reserva::find($id->reserva_id);
-        $habitacion = Habitacione::find($reserva->habitacione_id);
-        $sede = Sede::find($habitacion->sede_id);
-        $usuario = User::find($reserva->user_id);
+    public function descargar(Recibo $id)
+    {
+        if ($id->estado == 'Realizada') {
+            $reserva = Reserva::find($id->reserva_id);
+            $habitacion = Habitacione::find($reserva->habitacione_id);
+            $sede = Sede::find($habitacion->sede_id);
+            $usuario = User::find($reserva->user_id);
 
 
-        $fecha_entrada = Carbon::parse($reserva->fecha_entrada);
-        $fecha_salida = Carbon::parse($reserva->fecha_salida);
-        $cantidadDias = $fecha_entrada->diffInDays($fecha_salida);
-        
-        // Reciboo
-        $identificacionRecibo = now();
-        $fechaRecibo = Carbon::now();
-        $nombreSede = $sede->nombre;
+            $fecha_entrada = Carbon::parse($reserva->fecha_entrada);
+            $fecha_salida = Carbon::parse($reserva->fecha_salida);
+            $cantidadDias = $fecha_entrada->diffInDays($fecha_salida);
 
-        // Cliente
-        $nombreCliente = $usuario->name . ' ' . $usuario->apellido;
-        $identificacionCliente = $usuario->identificacion;
+            // Reciboo
+            $identificacionRecibo = $id->identificador;
+            $fechaRecibo = $id->fecha_emision;
+            $nombreSede = $sede->nombre;
 
-        // Tabla Producto o Servicio
-        $habitacionNombre = $habitacion->identificador;
-        $tipo = $habitacion->tipo;
-        $cantidad = $cantidadDias;
-        $precioUnit = $habitacion->precio;
-        $totalAPagar = $precioUnit * $cantidadDias;
+            // Cliente
+            $nombreCliente = $usuario->name . ' ' . $usuario->apellido;
+            $identificacionCliente = $usuario->identificacion;
 
-        $pdf = Pdf::loadView('software.componet.recibo', [
-            'identificacionRecibo' => $identificacionRecibo,
-            'fechaRecibo' => $fechaRecibo,
-            'nombreSede' => $nombreSede,
-            'nombreCliente' => $nombreCliente,
-            'identificacionCliente' => $identificacionCliente,
-            'entrada' => $fecha_entrada,
-            'salida' => $fecha_salida,
-            'habitacion' => $habitacionNombre,
-            'tipo' => $tipo,
-            'cantidad' => $cantidad,
-            'precioUnit' => $precioUnit,
-            'totalAPagar' => $totalAPagar,
-        ]);
+            // Tabla Producto o Servicio
+            $habitacionNombre = $habitacion->identificador;
+            $tipo = $habitacion->tipo;
+            $cantidad = $cantidadDias;
+            $precioUnit = $habitacion->precio;
+            $totalAPagar = $precioUnit * $cantidadDias;
 
-        return $pdf->stream();
+            $pdf = Pdf::loadView('software.componet.recibo', [
+                'identificacionRecibo' => $identificacionRecibo,
+                'fechaRecibo' => $fechaRecibo,
+                'nombreSede' => $nombreSede,
+                'nombreCliente' => $nombreCliente,
+                'identificacionCliente' => $identificacionCliente,
+                'entrada' => $fecha_entrada,
+                'salida' => $fecha_salida,
+                'habitacion' => $habitacionNombre,
+                'tipo' => $tipo,
+                'cantidad' => $cantidad,
+                'precioUnit' => $precioUnit,
+                'totalAPagar' => $totalAPagar,
+            ]);
+
+            return $pdf->stream();
+        }
+        return redirect()->route('recibos');
     }
 
     public function anular(Recibo $id): JsonResponse
