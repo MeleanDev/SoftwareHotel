@@ -16,7 +16,6 @@ class Recibo extends Model
      */
     protected $fillable = [
         'monto',
-        'descripcion',
         'estado',
         'fecha_emision',
         'reserva_id',

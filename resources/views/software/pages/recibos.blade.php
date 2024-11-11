@@ -23,7 +23,6 @@
                     <tr>
                         <th data-priority="1">Identifiacador</th>
                         <th>Estado</th>
-                        <th>Descripcion</th>
                         <th>Fecha Emision</th>
                         <th>Monto</th>
                         <th>ID reserva</th>
@@ -43,7 +42,6 @@
                     <tr>
                         <th data-priority="1">Identifiacador</th>
                         <th>Estado</th>
-                        <th>Descripcion</th>
                         <th>Fecha Emision</th>
                         <th>Monto</th>
                         <th>ID reserva</th>

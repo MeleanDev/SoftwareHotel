@@ -131,7 +131,7 @@ class ReservaController extends Controller
         return response()->json(['success' => true]);
     }
 
-    public function completada(Reserva $id): JsonResponse
+    public function completada(Reserva $id)
     {
         $id->estado = 'Completada';
         $id->save();

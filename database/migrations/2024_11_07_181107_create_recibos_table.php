@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('recibos', function (Blueprint $table) {
             $table->id();
             $table->string('identificador');
-            $table->string('descripcion');
             $table->string('estado');
             $table->dateTime('fecha_emision');
             $table->integer('monto');
