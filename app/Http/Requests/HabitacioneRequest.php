@@ -25,7 +25,7 @@ class HabitacioneRequest extends FormRequest
             'identificador' => ['required', 'string', 'max:5', 'min:1'],
             'piso' => ['required', 'integer', 'max_digits:3', 'min_digits:1'],
             'tipo' => ['required', 'string', 'max:13', 'min:1'],
-            'numPersonas' => ['required', 'integer', 'min_digits:1', 'max_digits:4'],
+            'numPersonas' => ['required', 'integer', 'min_digits:1', 'max_digits:3'],
             'precio' => ['required'],
             'sede_id' => ['required']
         ];

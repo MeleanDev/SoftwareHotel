@@ -96,6 +96,13 @@ class BDClass
             return $datos;
         }
 
+        // Disponibles Moderador
+        public function habitacionesDisponiblesModerador($sede)
+        {
+            $datos = Habitacione::where('disponibilidad', 'disponible')->where('sede_id', $sede)->with('sede')->get();
+            return $datos;
+        }
+
         // Lista Moderador
         public function HabitacionesListaModerador($sede)
         {
@@ -294,6 +301,15 @@ class BDClass
         public function ReciboLista(){
             $datos = Recibo::with('reserva')->get();
             return $datos;
+        }
+
+        public function ReciboListaModerador($sede){
+            $recibos = Recibo::with('reserva.habitacione.sede')
+    ->whereHas('reserva.habitacione.sede', function ($query) use ($sede) {
+        $query->where('sedes.id', $sede);
+    })
+    ->get();
+            return $recibos;
         }
 
         public function ReciboCrear($id){

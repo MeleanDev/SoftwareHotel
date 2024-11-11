@@ -60,7 +60,13 @@ class ReservaController extends Controller
 
     public function habitaciones(Request $request): JsonResponse
     {
-        $habitaciones = $this->reservaClass->habitaciones();
+        $user = Auth::user();
+        if ($user->hasRole('Administrador')) {
+            $habitaciones = $this->reservaClass->habitaciones();
+        }
+        if ($user->hasRole('Moderador')) {
+            $habitaciones = $this->reservaClass->habitacionesModerador($user->sede_id);
+        }
 
         $term = $request->get('term');
 

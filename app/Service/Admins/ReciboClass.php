@@ -27,6 +27,15 @@ class ReciboClass
         return $datos;
     }
 
+    public function listaModerador($sede){
+        $datos = $this->consultaDB->ReciboListaModerador($sede);
+        foreach ($datos as $item) {
+            $user = User::find($item->reserva->user_id);
+            $item->user = $user->identificacion;
+        }
+        return $datos;
+    }
+
     public function anular($id){
         $this->consultaDB->ReciboAnular($id);
     }

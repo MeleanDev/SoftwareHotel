@@ -12,6 +12,8 @@ use App\Service\Admins\ReciboClass;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Auth;
+use Spatie\Permission\Traits\HasRoles;
 use Illuminate\View\View;
 
 class ReciboController extends Controller
@@ -30,7 +32,13 @@ class ReciboController extends Controller
 
     public function lista()
     {
-        $datos = $this->reciboClass->lista();
+        $user = Auth::user();
+        if ($user->hasRole('Administrador')) {
+            $datos = $this->reciboClass->lista();
+        }
+        if ($user->hasRole('Moderador')) {
+            $datos = $this->reciboClass->listaModerador($user->sede_id);
+        }
         return datatables()->of($datos)->toJson();
     }
 

@@ -5,33 +5,8 @@ const selectHabitacion = $("#habitacione_id");
 const selectHuesped = $("#huesped_id");
 
 $(document).ready(function () {
-
-    // habitaciones
-    $.ajax({
-        url: urlCompleta + "/Lista/Habitaciones",
-        type: 'GET',
-        dataType: "json",
-        success: function (data) {
-            data.forEach(function (item) {
-                const optionHabitacion = new Option(item.habitacionText, item.habitacionId);
-                selectHabitacion.append(optionHabitacion);
-            });
-        }
-    });
-
-    // Huesped
-    $.ajax({
-        url: urlCompleta + "/Lista/Huesped",
-        type: 'GET',
-        dataType: "json",
-        success: function (data) {
-            data.forEach(function (item) {
-                const optionHuesped = new Option(item.huespedText, item.huespedId);
-                selectHuesped.append(optionHuesped);
-            });
-        }
-    });
-
+    SelectHabitaciones();
+    SelectHuesped();
 });
 
 var table = new DataTable('#datatable', {
@@ -395,6 +370,9 @@ activar = function (id) {
                 },
                 success: function (data) {
                     if (data.success) {
+                        // habitaciones
+                        SelectHabitaciones();
+                        SelectHuesped();
                         table.ajax.reload(null, false);
                         notificacion.fire({
                             icon: "success",
@@ -440,6 +418,8 @@ completar = function (id) {
                 },
                 success: function (data) {
                     if (data.success) {
+                        SelectHabitaciones();
+                        SelectHuesped();
                         table.ajax.reload(null, false);
                         notificacion.fire({
                             icon: "success",
@@ -465,3 +445,38 @@ completar = function (id) {
         }
     });
 };
+
+function SelectHabitaciones() {
+    // habitaciones
+    $.ajax({
+        url: urlCompleta + "/Lista/Habitaciones",
+        type: 'GET',
+        dataType: "json",
+        success: function (data) {
+            // Limpiar el select antes de agregar nuevas opciones
+            selectHabitacion.empty();
+
+            data.forEach(function (item) {
+                const optionHabitacion = new Option(item.habitacionText, item.habitacionId);
+                selectHabitacion.append(optionHabitacion);
+            });
+        }
+    });
+}
+
+function SelectHuesped() {
+    // Huesped
+    $.ajax({
+        url: urlCompleta + "/Lista/Huesped",
+        type: 'GET',
+        dataType: "json",
+        success: function (data) {
+            data.forEach(function (item) {
+                selectHuesped.empty();
+                const optionHuesped = new Option(item.huespedText, item.huespedId);
+                selectHuesped.append(optionHuesped);
+            });
+        }
+    });
+    
+}
