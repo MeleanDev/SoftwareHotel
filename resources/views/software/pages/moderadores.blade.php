@@ -11,6 +11,8 @@
 @section('plugins.Datatables', true)
 {{-- Sweetalert2 --}}
 @section('plugins.Sweetalert2', true)
+{{-- Select2 --}}
+    @section('plugins.Select2', true)
 
 {{-- Content body: main page content --}}
 
@@ -74,7 +76,7 @@
                         </div>
                         <div class="form-group">
                             <label for="sede_id">Sede a asignar</label>
-                            <select id="sede_id" required class="form-control">
+                            <select id="sede_id" required style="width: 100%" class="form-control">
                             </select>
                         </div>
                         <div class="form-group">

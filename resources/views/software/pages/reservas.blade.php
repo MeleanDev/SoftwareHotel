@@ -11,6 +11,8 @@
 @section('plugins.Datatables', true)
 {{-- Sweetalert2 --}}
 @section('plugins.Sweetalert2', true)
+{{-- Select2 --}}
+    @section('plugins.Select2', true)
 
 {{-- Content body: main page content --}}
 
@@ -77,13 +79,13 @@
                             <div class="form-group col-md-6">
                                 <label for="habitacione_id">Habitacion</label>
                                 <input type="hidden" class="form-control" id="habitacione_idVer" readonly>
-                                <select id="habitacione_id" required class="form-control">
+                                <select id="habitacione_id" style="width: 100%" required class="form-control">
                                 </select>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="huesped_id">Huesped</label>
                                 <input type="hidden" class="form-control" id="huesped_idVer" readonly>
-                                <select id="huesped_id" required class="form-control">
+                                <select id="huesped_id" style="width: 100%" required class="form-control">
                                 </select>
                             </div>
                         </div>

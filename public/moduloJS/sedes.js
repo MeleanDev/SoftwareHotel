@@ -2,6 +2,15 @@ var token = $('meta[name="csrf-token"]').attr('content');
 var opcion;
 const urlCompleta = window.location.href;
 
+$(document).ready(function() {
+    $('#pais').select2({
+      dropdownParent: $('#modalCRUD'),
+      width: 'resolve',
+      theme: "classic",
+      placeholder: "Selecciona un Pais",
+    });
+  });
+
 var table = new DataTable('#datatable', {
     ajax: urlCompleta + '/Lista',
     responsive: true,

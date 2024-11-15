@@ -9,6 +9,8 @@
 {{-- plugins --}}
 {{-- Datatable --}}
 @section('plugins.Datatables', true)
+{{-- Sweetalert2 --}}
+@section('plugins.Sweetalert2', true)
 
 {{-- Content body: main page content --}}
 

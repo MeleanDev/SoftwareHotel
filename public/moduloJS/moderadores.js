@@ -31,6 +31,13 @@ $(document).ready(function () {
       $('#email').on('input', function() {
           $(this).val($(this).val().replace(/\s+/g, ''));
       });
+
+      $('#sede_id').select2({
+        dropdownParent: $('#modalCRUD'),
+        width: 'resolve',
+        theme: "classic",
+        placeholder: "Selecciona una Sede",
+      });
 });
 
 var table = new DataTable('#datatable', {

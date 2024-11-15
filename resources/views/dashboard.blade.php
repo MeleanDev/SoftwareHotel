@@ -13,7 +13,6 @@
     <div class="container">
         @role('Administrador')
             @include('software.componet.adminView').
-
         @endrole
         @role('Moderador')
             @include('software.componet.moderadorView').
@@ -54,7 +53,6 @@
                 </div>
             </div>
         </div>
-        <button type="button" class="btn btn-primary">Primary</button>
     </div>
 @stop
 

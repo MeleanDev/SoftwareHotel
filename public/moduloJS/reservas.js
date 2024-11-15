@@ -7,6 +7,18 @@ const selectHuesped = $("#huesped_id");
 $(document).ready(function () {
     SelectHabitaciones();
     SelectHuesped();
+    $('#habitacione_id').select2({
+        dropdownParent: $('#modalCRUD'),
+        width: 'resolve',
+        theme: "classic",
+        placeholder: "Selecciona una Habitacion",
+      });
+        $('#huesped_id').select2({
+          dropdownParent: $('#modalCRUD'),
+          width: 'resolve',
+          theme: "classic",
+          placeholder: "Selecciona un Huesped",
+        });
 });
 
 var table = new DataTable('#datatable', {
