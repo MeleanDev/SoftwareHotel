@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('identificador');
             $table->string('estado');
             $table->dateTime('fecha_emision');
-            $table->integer('monto');
+            $table->float('monto');
             $table->foreignId('reserva_id')->references('id')->on('reservas')->onDelete('restrict');
             // $table->timestamps();
         });
