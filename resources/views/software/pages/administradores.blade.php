@@ -54,31 +54,37 @@
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label for="nombre">Nombre</label>
-                                <input type="text" required minlength="1" maxlength="255" class="form-control" id="nombre" placeholder="Nombre">
+                                <input type="text" required minlength="1" maxlength="255" class="form-control"
+                                    id="nombre" placeholder="Nombre">
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="apellido">Apellido</label>
-                                <input type="text" required minlength="1" maxlength="255" class="form-control" id="apellido" placeholder="Apellido">
+                                <input type="text" required minlength="1" maxlength="255" class="form-control"
+                                    id="apellido" placeholder="Apellido">
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label for="telefono">Telefono</label>
-                                <input type="tel" required minlength="1" maxlength="20" class="form-control" id="telefono" placeholder="Telefono">
+                                <input type="tel" required minlength="1" maxlength="20" class="form-control"
+                                    id="telefono" placeholder="Telefono">
                             </div>
 
                             <div class="form-group col-md-6">
                                 <label for="identificacion">Identificacion</label>
-                                <input type="text" required minlength="1" maxlength="20" class="form-control" id="identificacion" placeholder="Identificacion">
+                                <input type="text" required minlength="1" maxlength="20" class="form-control"
+                                    id="identificacion" placeholder="Identificacion">
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="email">Email</label>
-                            <input type="email" required minlength="1" maxlength="255" class="form-control" id="email" placeholder="Email">
+                            <input type="email" required minlength="1" maxlength="255" class="form-control"
+                                id="email" placeholder="Email">
                         </div>
                         <div class="form-group">
                             <label for="password">Password</label>
-                            <input type="password" required minlength="8" maxlength="255" class="form-control" id="password" placeholder="Password">
+                            <input type="password" required minlength="8" maxlength="255" class="form-control"
+                                id="password" placeholder="Password">
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -101,5 +107,90 @@
 @endpush
 
 @push('js')
+    <script>
+        const urlCompleta = window.location.href;
+        var table = new DataTable('#datatable', {
+            ajax: urlCompleta + '/Lista',
+            responsive: true,
+            processing: true,
+            serverSide: true,
+            lengthMenu: [
+                [10, 25, 50],
+                [10, 25, 50]
+            ],
+            columns: [{
+                    data: 'name',
+                    name: 'name',
+                    className: 'text-center'
+                },
+                {
+                    data: 'apellido',
+                    name: 'apellido',
+                    className: 'text-center'
+                },
+                {
+                    data: 'identificacion',
+                    name: 'identificacion',
+                    className: 'text-center'
+                },
+                {
+                    data: 'telefono',
+                    name: 'telefono',
+                    className: 'text-center'
+                },
+                {
+                    data: 'email',
+                    name: 'email',
+                    className: 'text-center'
+                },
+
+                {
+                    "data": null,
+                    "width": "100px",
+                    "className": "text-center",
+                    "render": function(row, data) {
+                        if (row.identificacion == '{{ Auth::user()->identificacion }}') {
+                            return `<span class="badge badge-success">Tu</span>`
+                        } else {
+                            return `
+                        <div class="dropdown dropleft">
+                            <button class="btn btn-link text-secondary mb-0 dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fa fa-ellipsis-v text-xs"></i>
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-sm" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" data-id="${row.id}" href="javascript:editar(${row.id});"><i class="fa fa-edit text-warning"></i> Editar</a>
+                                <a class="dropdown-item" data-id="${row.id}" href="javascript:eliminar(${row.id});"><i class="fa fa-trash text-danger"></i> Eliminar</a>
+                            </div>
+                        </div>`;
+                        }
+                    },
+                    "orderable": false
+                },
+            ],
+            columnDefs: [{
+                orderable: false,
+                targets: [5],
+                responsivePriority: 1,
+                responsivePriority: 2,
+
+            }],
+            language: {
+                "zeroRecords": "No se encontraron resultados",
+                "emptyTable": "Ningún dato disponible en esta tabla",
+                "lengthMenu": "Mostrar _MENU_ registros",
+                "info": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                "infoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+                "infoFiltered": "(filtrado de un total de _MAX_ registros)",
+                "sSearch": "Buscar:",
+                "oPaginate": {
+                    "sFirst": "Primero",
+                    "sLast": "Último",
+                    "sNext": "Siguiente",
+                    "sPrevious": "Anterior"
+                },
+                "sProcessing": "Procesando...",
+            },
+        });
+    </script>
     <script src="{{ asset('moduloJS/administradores.js') }}"></script>
 @endpush

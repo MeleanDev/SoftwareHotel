@@ -1,6 +1,5 @@
 var token = $('meta[name="csrf-token"]').attr('content');
 var opcion;
-const urlCompleta = window.location.href;
 
 $(document).ready(function() {
     $('#nombre').on('input', function() {
@@ -16,85 +15,6 @@ $(document).ready(function() {
         $(this).val($(this).val().replace(/\s+/g, ''));
     });
   });
-
-var table = new DataTable('#datatable', {
-    ajax: urlCompleta + '/Lista',
-    responsive: true,
-    processing: true,
-    serverSide: true,
-    lengthMenu: [
-        [10, 25, 50],
-        [10, 25, 50]
-    ],
-    columns: [{
-        data: 'name',
-        name: 'name',
-        className: 'text-center'
-    },
-    {
-        data: 'apellido',
-        name: 'apellido',
-        className: 'text-center'
-    },
-    {
-        data: 'identificacion',
-        name: 'identificacion',
-        className: 'text-center'
-    },
-    {
-        data: 'telefono',
-        name: 'telefono',
-        className: 'text-center'
-    },
-    {
-        data: 'email',
-        name: 'email',
-        className: 'text-center'
-    },
-
-    {
-        "data": null,
-        "width": "100px",
-        "className": "text-center",
-        "render": function (row) {
-            return `
-                        <div class="dropdown dropleft">
-                            <button class="btn btn-link text-secondary mb-0 dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fa fa-ellipsis-v text-xs"></i>
-                            </button>
-                            <div class="dropdown-menu dropdown-menu-sm" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" data-id="${row.id}" href="javascript:editar(${row.id});"><i class="fa fa-edit text-warning"></i> Editar</a>
-                                <a class="dropdown-item" data-id="${row.id}" href="javascript:eliminar(${row.id});"><i class="fa fa-trash text-danger"></i> Eliminar</a>
-                            </div>
-                        </div>`;
-        },
-        "orderable": false
-    },
-    ],
-    columnDefs: [{
-        orderable: false,
-        targets: [5],
-        responsivePriority: 1,
-        responsivePriority: 2,
-
-    }],
-    language: {
-        "zeroRecords": "No se encontraron resultados",
-        "emptyTable": "Ningún dato disponible en esta tabla",
-        "lengthMenu": "Mostrar _MENU_ registros",
-        "info": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-        "infoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
-        "infoFiltered": "(filtrado de un total de _MAX_ registros)",
-        "sSearch": "Buscar:",
-        "oPaginate": {
-            "sFirst": "Primero",
-            "sLast": "Último",
-            "sNext": "Siguiente",
-            "sPrevious": "Anterior"
-        },
-        "sProcessing": "Procesando...",
-    },
-});
 
 // Consulta Registro
 consulta = function(id) {
