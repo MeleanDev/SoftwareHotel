@@ -30,12 +30,17 @@
                                 <p class="mb-2">
                                     <br>Al sistema de administracion de reservas del Hotel. <br><br>
                                 </p>
-                        
-                                <a href="#" target="_blank" class="btn btn-sm btn-primary">Contactar con los 
-                                    @role('Administrador') Desarrolladores @endrole
-                                    @role('Moderador') Administradores @endrole
-                                    @role('Huesped') Administradores @endrole
-                                </a>
+                                @role('Administrador')
+                                <a href="https://api.whatsapp.com/send?phone=584246953455&text=Soy%20Administrador%20del%20sistema%20del%20hotel%20maruma,%20necesito%20ayuda" target="_blank" class="btn btn-sm btn-primary">Contactar con los Desarrolladores</a>
+                                @endrole
+
+                                @role('Moderador') 
+                                <a href="https://api.whatsapp.com/send?phone=584246953455&text=Soy%20Moderador%20del%20sistema%20del%20hotel%20maruma,%20necesito%20ayuda" target="_blank" class="btn btn-sm btn-primary">Contactar con los Administradores</a>
+                                @endrole
+
+                                @role('Huesped') 
+                                <a href="https://api.whatsapp.com/send?phone=584246953455&text=Soy%20Huesped%20del%20sistema%20del%20hotel%20maruma,%20necesito%20ayuda" target="_blank" class="btn btn-sm btn-primary">Contactar con los Administradores</a>
+                                @endrole
                             </div>
                         </div>
                         <div class="col-sm-5 text-center text-sm-left">
