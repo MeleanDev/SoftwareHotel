@@ -73,7 +73,6 @@
             @endif
         </div>
     </form>
-
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const nameInput = document.getElementById('name');
