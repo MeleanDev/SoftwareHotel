@@ -24,12 +24,13 @@ class DashboardController extends Controller
         return view('dashboard', compact('huespedes', 'reservas', 'habitaciones'));
     }
 
-    public function cambio(){
-        try {
-            $output = shell_exec('python C:/Users/juans/Desktop/SoftwareHotel/script.py');
-        return "MMGV";
-        } catch (\Throwable $th) {
-        return "VIVIANA GUSTA DEL GORDITO";
-        }
+    public function manual()
+    {
+        $filePath = public_path('manual/pdf/ManualdeUsuario.pdf');
+
+        return response()->file($filePath, [
+            'Content-Type' => 'application/pdf',
+            'Content-Disposition' => 'attachment; filename="ManualdeUsuario.pdf"'
+        ]);
     }
 }

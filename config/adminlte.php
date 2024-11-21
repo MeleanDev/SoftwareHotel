@@ -379,6 +379,12 @@ return [
             'icon' => 'fas fa-address-book',
             'can' => 'huesped',
         ],
+        [
+            'text' => 'Manual Usuario',
+            'route' => 'manual',
+            'icon' => 'fas fa-atlas',
+            'can' => 'manual',
+        ],
         ['header' => 'account_settings'],
         [
             'text' => 'profile',

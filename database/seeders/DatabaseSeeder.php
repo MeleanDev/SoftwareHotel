@@ -26,6 +26,7 @@ class DatabaseSeeder extends Seeder
         Permission::create(['name' => 'huesped'])->syncRoles([$admin, $moderador]);
         Permission::create(['name' => 'reservas'])->syncRoles([$admin, $moderador]);
         Permission::create(['name' => 'recibos'])->syncRoles([$admin, $moderador]);
+        Permission::create(['name' => 'manual'])->syncRoles([$admin, $moderador]);
         Permission::create(['name' => 'sedes'])->assignRole($admin);
         Permission::create(['name' => 'habitaciones'])->assignRole($admin);
         Permission::create(['name' => 'moderadores'])->assignRole($admin);

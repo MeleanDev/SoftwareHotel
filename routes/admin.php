@@ -27,7 +27,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
         // Panel principal
         Route::controller(DashboardController::class)->group(function () {
             Route::get('Dashboard', 'index')->name('dashboard');
-            // Route::get('cambio', 'cambio');
+        });
+
+        // Manual
+        Route::controller(DashboardController::class)->middleware('can:manual')->group(function () {
+            Route::get('Manual', 'manual')->name('manual');
         });
 
         // Sede
